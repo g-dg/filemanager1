@@ -1,5 +1,5 @@
 <?php
-require_once('incl.php');
+require_once('version.php');
 
 // load various required files
 require_once('config.php');

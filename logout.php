@@ -1,5 +1,5 @@
 <?php
-require_once('incl.php');
+require_once('version.php');
 
 session_start();
 session_unset();

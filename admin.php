@@ -1,5 +1,5 @@
 <?php
-require_once('incl.php');
+require_once('version.php');
 
 require_once('config.php');
 require_once('session.php');
