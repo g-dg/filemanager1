@@ -1,5 +1,5 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.0.0');
+require_once('incl.php');
 ?><!DOCTYPE html>
 <html>
 	<head>

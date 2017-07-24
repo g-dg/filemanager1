@@ -1,5 +1,5 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.0.0');
+require_once('incl.php');
 
 require_once('config.php');
 require_once('session.php');
