@@ -1,5 +1,5 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.0.0');
+define('GD_FILEMANAGER_VERSION', '1.0.1');
 ?><!DOCTYPE html>
 <html>
 	<head>
