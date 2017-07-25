@@ -1,5 +1,5 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.0.1');
+define('GD_FILEMANAGER_VERSION', '1.0.2');
 
 session_start();
 session_unset();
