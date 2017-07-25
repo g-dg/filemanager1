@@ -1,8 +1,9 @@
 <?php
 require_once('version.php');
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8"></meta>
 		<title>Log In to Garnet DeGelder's File Manager</title>
 	</head>
 	<body>
