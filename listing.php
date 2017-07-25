@@ -14,8 +14,9 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 function outputListing($body)
 {
 	$listing_head = '<!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8"></meta>
 		<title>/'.$GLOBALS['requested_full_path'].' - Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'</title>
 	</head>
 	<body>

@@ -1,8 +1,9 @@
 <?php
 define('GD_FILEMANAGER_VERSION', '1.0.1');
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8"></meta>
 		<title>Log In to Garnet DeGelder's File Manager</title>
 	</head>
 	<body>

@@ -165,8 +165,9 @@ function getFullShareList()
 }
 
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8"></meta>
 		<title>Administration - Garnet DeGelder's File Manager <?=htmlentities(GD_FILEMANAGER_VERSION);?></title>
 	</head>
 	<body>

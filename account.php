@@ -10,8 +10,9 @@ checkUserIP();
 authenticate();
 
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8"></meta>
 		<title>My Account - Garnet DeGelder's File Manager <?=htmlentities(GD_FILEMANAGER_VERSION);?></title>
 	</head>
 	<body>
