@@ -9,6 +9,8 @@ function serveFile($share, $file_path)
 {
 	if (canReadShare($share))
 	{
+		// don't timeout (not sure if needed)
+		set_time_limit(0);
 		//TODO: write my own library for this
 		require_once('sendfile.php');
 		$path = getFsPath($share, $file_path);
