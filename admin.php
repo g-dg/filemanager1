@@ -37,7 +37,7 @@ function getUserList()
 			'<th>Update Groups</th>'.
 			'<th>&nbsp;</th>'.
 			'<th>Delete User</th>'.
-			'<th>Log In As</th>'.
+			'<th>Log In</th>'.
 			'</tr></thead><tbody>';
 	foreach ($GLOBALS['all_users'] as $user)
 	{
@@ -53,8 +53,8 @@ function getUserList()
 				'<td><input type="text" name="user_groups_'.$user['ID'].'" value="'.htmlentities($user['GROUPS']).'" size="40"></input></td>'.
 				'<td><input type="submit" name="change_user_groups_'.$user['ID'].'" value="Update Groups" onclick="return confirm(\'Proceed with user group update?\');"></input></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="submit" name="delete_user_'.$user['ID'].'" value="Delete &quot;'.htmlentities($user['NAME']).'&quot;" style="width: 100%;" onclick="return confirm(\'Proceed with user deletion?\');"></input></td>'.
-				'<td><input type="submit" name="login_as_user_'.$user['ID'].'" value="Log in as &quot;'.htmlentities($user['NAME']).'&quot;" style="width: 100%;" onclick="return confirm(\'Proceed with log in?\');"></input></td>'.
+				'<td><input type="submit" name="delete_user_'.$user['ID'].'" value="Delete &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with user deletion?\');"></input></td>'.
+				'<td><input type="submit" name="login_as_user_'.$user['ID'].'" value="Log in as &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with log in?\');"></input></td>'.
 				'</tr>';
 	}
 	$html_listing .= '<tr>'.
@@ -87,7 +87,7 @@ function getUserList()
 			'<td><input type="text" name="create_user_groups" value="" size="40"></input></td>'.
 			'<td></td>'.
 			'<td>&nbsp;</td>'.
-			'<td><input type="submit" name="create_user" value="Create User" style="width: 100%;" onclick="return confirm(\'Proceed with user creation?\');"></input></td>'.
+			'<td><input type="submit" name="create_user" value="Create User" onclick="return confirm(\'Proceed with user creation?\');"></input></td>'.
 			'<td></td>'.
 			'</tr>';
 	return $html_listing . '</tbody></table><input type="hidden" name="user_ids" value="'.implode(',', $user_ids).'"></input>'.PHP_EOL;
@@ -125,7 +125,7 @@ function getFullShareList()
 				'<td><input type="text" name="share_groups_modify_'.$share['ID'].'" value="'.htmlentities($share['GROUPS_MODIFY_FILES']).'" size="40"></input></td>'.
 				'<td><input type="submit" name="change_share_groups_'.$share['ID'].'" value="Update Groups" onclick="return confirm(\'Proceed with share group update?\');"></input></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="submit" name="delete_share_'.$share['ID'].'" value="Delete &quot;'.htmlentities($share['NAME']).'&quot;" style="width: 100%;" onclick="return confirm(\'Proceed with share deletion?\');"></input></td>'.
+				'<td><input type="submit" name="delete_share_'.$share['ID'].'" value="Delete &quot;'.htmlentities($share['NAME']).'&quot;" onclick="return confirm(\'Proceed with share deletion?\');"></input></td>'.
 				'</tr>';
 	}
 	$html_listing .= '<tr>'.
@@ -159,7 +159,7 @@ function getFullShareList()
 			'<td><input type="text" name="create_share_groups_modify" value="" size="40"></input></td>'.
 			'<td></td>'.
 			'<td>&nbsp;</td>'.
-			'<td><input type="submit" name="create_share" value="Create Share" style="width: 100%;" onclick="return confirm(\'Proceed with share creation?\');"></input></td>'.
+			'<td><input type="submit" name="create_share" value="Create Share" onclick="return confirm(\'Proceed with share creation?\');"></input></td>'.
 			'</tr>';
 	return $html_listing . '</tbody></table><input type="hidden" name="share_ids" value="'.implode(',', $share_ids).'"></input>'.PHP_EOL;
 }
@@ -168,45 +168,62 @@ function getFullShareList()
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"></meta>
+		<meta name="viewport" content="width=device-width"></meta>
 		<title>Administration - Garnet DeGelder's File Manager <?=htmlentities(GD_FILEMANAGER_VERSION);?></title>
+		<link rel="stylesheet" type="text/css" href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css');?>"></link>
 	</head>
 	<body>
-		<div style="text-align: right; float: right;">
-			Currently logged in as "<?=htmlentities($_SESSION['username']);?>"
-			|
+		<div class="header">
+			<div class="tools">
+				<ul>
+					<li>
+						Currently logged in as "<?=htmlentities($_SESSION['username']);?>"
+					</li>
 <?php if (inGroup('root')) { ?>
-			<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php');?>">Administration</a>
-			|
+					<li>
+						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php');?>">Administration</a>
+					</li>
 <?php } ?>
-			<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php');?>">My Account</a>
-			|
-			<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php');?>">Log Out</a>
+					<li>
+						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php');?>">My Account</a>
+					</li>
+					<li>
+						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php');?>">Log Out</a>
+					</li>
+				</ul>
+			</div>
+			<div class="title">
+				Administration - Garnet DeGelder's File Manager on <?=htmlentities($_SERVER['HTTP_HOST']).PHP_EOL;?>
+			</div>
 		</div>
-		<div style="font-size: x-large;">Administration - Garnet DeGelder's File Manager on <?=htmlentities($_SERVER['HTTP_HOST']);?></div>
-		<hr />
-		<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']);?>">&lt; Back to main listing</a>
-		<br />
-		<br />
+		<div class="content">
+			<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']);?>">&lt; Back to main listing</a>
+			<br />
+			<br />
 <?php if (isset($_GET['msg'])) { ?>
-		<div style="font-size: large;"><?=htmlentities($_GET['msg']);?></div>
-		<br />
+			<div style="font-size: large;"><?=htmlentities($_GET['msg']);?></div>
+			<br />
 <?php } ?>
-		<noscript><div style="font-size: large;"><em>Note: You will not be asked for confirmation.</em></div><br /></noscript>
-		<form action="admin_backend.php" method="post">
-			<div style="overflow: auto;">
-				<fieldset>
-					<legend>Users</legend>
-					<?=getUserList();?>
-				</fieldset>
-			</div>
-			<br />
-			<div style="overflow: auto;">
-				<fieldset>
-					<legend>Shares</legend>
-					<?=getFullShareList();?>
-				</fieldset>
-			</div>
-			<br />
-		</form>
+			<noscript><div style="font-size: large;"><em>Note: You will not be asked for confirmation.</em></div><br /></noscript>
+			<form action="admin_backend.php" method="post">
+				<div style="overflow: auto;">
+					<fieldset>
+						<legend>Users</legend>
+						<?=getUserList();?>
+					</fieldset>
+				</div>
+				<br />
+				<div style="overflow: auto;">
+					<fieldset>
+						<legend>Shares</legend>
+						<?=getFullShareList();?>
+					</fieldset>
+				</div>
+				<br />
+			</form>
+		</div>
+		<div class="footer">
+			Copyright &copy; 2017  Garnet DeGelder
+		</div>
 	</body>
 </html>

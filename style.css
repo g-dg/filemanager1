@@ -1,0 +1,134 @@
+/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}article,aside,footer,header,nav,section{display:block;}h1{font-size:2em;margin:0.67em 0;}figcaption,figure,main{display:block;}figure{margin:1em 40px;}hr{box-sizing:content-box;height:0;overflow:visible;}pre{font-family:monospace, monospace;font-size:1em;}a{background-color:transparent;-webkit-text-decoration-skip:objects;}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted;}b,strong{font-weight:inherit;}b,strong{font-weight:bolder;}code,kbd,samp{font-family:monospace,monospace;font-size:1em;}dfn{font-style:italic;}mark{background-color:#ff0;color:#000;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sub{bottom:-0.25em;}sup{top:-0.5em;}audio,video{display:inline-block;}audio:not([controls]){display:none;height:0;}img{border-style:none;}svg:not(:root){overflow:hidden;}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0;}button,input{overflow:visible;}button,select{text-transform:none;}button,html[type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0;}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText;}fieldset{padding: 0.35em 0.75em 0.625em;}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal;}progress{display:inline-block;vertical-align:baseline;}textarea{overflow:auto;}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0;}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto;}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px;}[type="search"]::-webkit-search-cancel-button,[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit;}details,menu{display:block;}summary{display:list-item;}canvas{display:inline-block;}template{display:none;}[hidden]{display:none;}
+
+body{
+	margin: .5em;
+}
+
+.header {
+	float: left;
+	clear: both;
+	width: 100%;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	margin-bottom: .5em;
+}
+
+.header .tools {
+	text-align: right;
+	float: right;
+	font-size: 1em;
+	position: relative;
+	top: -1em;
+}
+.header .tools > ul > li {
+	list-style-type: none;
+	float: left;
+	border-left-color: black;
+	border-left-style: solid;
+	border-left-width: 1px;
+	padding-left: .25em;
+	margin-left: .25em;
+}
+.header .tools ul > li:first-child {
+	border-left: none;
+}
+
+.header .title {
+	font-size: 1.5em;
+	text-align: left;
+	display: inline;
+	margin: 0em;
+}
+
+.content {
+	clear: both;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+.content form.standard label {
+	clear: left;
+	float: left;
+	min-width: 5em;
+	text-align: right;
+	margin-right: .5em;
+	position: relative;
+	margin: 0.25em;
+}
+.content form.standard input,
+.content form.standard button,
+.content form.standard textarea,
+.content form.standard select {
+	float: left;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+	vertical-align: middle;
+}
+.content form.standard input[type="button"],
+.content form.standard input[type="submit"],
+.content form.standard input[type="reset"],
+.content form.standard button {
+	clear: both;
+	margin-top: 1em;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+	min-width: 100%;
+}
+
+.footer {
+	border-top-color: gray;
+	border-top-style: solid;
+	border-top-width: 1px;
+	clear: both;
+	width: 100%;
+	float: left;
+	margin-top: 1em;
+	text-align: right;
+	font-size: .67em;
+	font-weight: lighter;
+	font-style: italic;
+	color: gray;
+	padding-top: .33em;
+}
+
+.login {
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+}
+@media (max-width: 500px) {
+	.login {
+		width: 67%;
+	}
+	.content form.standard label{
+		text-align: center;
+	}
+}
+
+.login input[type="button"],
+.login input[type="submit"],
+.login input[type="reset"],
+.login button {
+	min-width: 50%;
+	width: 75%;
+	margin-left: 12.5%;
+	margin-right: 12.5%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.motd {
+	clear: both;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-top-width: 1px;
+	width: 100%;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	text-align: center;
+}
