@@ -7,11 +7,16 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 
 require_once('template.php');
 
-/* Listing arrays have:
- * 'name' => displayed name
- * 'uri' => full, http- and href-ready uri\
- * 'basic_type' => 'directory' || 'file'  (shares are classifed as directories)
- */
+/*
+Listing arrays have:
+'name' => displayed name
+'uri' => full, http- and href-ready uri
+'basic_type' => 'directory' || 'file'  (shares are classifed as directories)
+
+as of 1.5:
+'size' => filesize (bytes) / number of files in directory
+'last_modified' => last modified time (as int UNIX timestamp)
+*/
 
 function outputListing($body)
 {
