@@ -139,11 +139,11 @@ function getFileSize($share, $path_string)
 {
 	//TODO: finish this
 	return 0;
-	
+
 	switch (getBasicFileType($share, $path_string))
 	{
 		case 'root_directory':
-			//
+			return getNumberOfVisibleShares();
 			break;
 		case 'directory':
 			//
@@ -163,7 +163,7 @@ function getFileModificationTime($share, $path_string)
 	{
 		// return the number of visible shares
 		// (there is no need of this though)
-		return getNumberOfVisibleShares();
+		return 0;
 	}
 	$fs_path = getFsPath($share, $path_string);
 	return (filemtime($fs_path));
