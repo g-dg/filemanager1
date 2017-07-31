@@ -1,6 +1,14 @@
 <?php
 require_once('init.php');
+require_once('config.php');
+require_once('session.php');
+require_once('database.php');
+require_once('auth.php');
 require_once('template.php');
+
+startSession();
+checkUserIP();
+authenticate();
 
 echo getStandardTemplateHeader('About');
 
