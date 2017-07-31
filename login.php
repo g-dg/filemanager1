@@ -1,5 +1,5 @@
 <?php
-require_once('version.php');
+require_once('init.php');
 require_once('template.php');
 
 echo getLoginTemplateHeader();

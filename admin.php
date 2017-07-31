@@ -1,6 +1,6 @@
 <?php
 
-require_once('version.php');
+require_once('init.php');
 
 require_once('config.php');
 require_once('session.php');

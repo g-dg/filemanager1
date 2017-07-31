@@ -1,5 +1,5 @@
 <?php
-require_once('version.php');
+require_once('init.php');
 
 // load various required files
 require_once('config.php');

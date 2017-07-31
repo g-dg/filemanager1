@@ -62,7 +62,14 @@ function getStandardTemplateFooter()
 		</div>
 		<div class="footer">
 			Copyright &copy; 2017  Garnet DeGelder
-		</div>
+';
+	if (GD_FILEMANAGER_PROFILER_ENABLE)
+	{
+		$footer .= '			<br />
+			Page generated in '.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).'seconds.
+';
+	}
+	$footer .= '		</div>
 	</body>
 </html>
 ';
