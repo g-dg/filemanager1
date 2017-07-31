@@ -5,15 +5,6 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
-require_once('config.php');
-require_once('session.php');
-require_once('database.php');
-require_once('auth.php');
-
-startSession();
-checkUserIP();
-authenticate();
-
 function getStandardTemplateHeader($title)
 {
 	$header = '<!DOCTYPE html>
