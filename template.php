@@ -6,6 +6,13 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 }
 
 require_once('config.php');
+require_once('session.php');
+require_once('database.php');
+require_once('auth.php');
+
+startSession();
+checkUserIP();
+authenticate();
 
 function getStandardTemplateHeader($title)
 {
@@ -27,6 +34,7 @@ function getStandardTemplateHeader($title)
 		$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></li>';
 	}
 	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></li>';
+	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/about.php').'">About</a></li>';
 	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></li>';
 	$header .= '</ul>
 			</div>
