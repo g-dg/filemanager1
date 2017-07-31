@@ -133,3 +133,14 @@ button {
 	padding-bottom: .5em;
 	text-align: center;
 }
+
+th,
+td {
+	padding-left: .5em;
+	padding-right: .5em;
+}
+
+.error {
+	font-size: large;
+	color: #FF0000;
+}

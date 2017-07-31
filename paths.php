@@ -7,6 +7,7 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 
 // used to sanitize path arrays
 // removes blanks and names starting with '.'
+// WARNING: on Windows, this still allows access to device names (CON, LPT1, COM1, etc.)
 function sanitizePathArray($dirty_path_array)
 {
 	$clean_path_array = array();
@@ -137,19 +138,22 @@ function getBasicFileType($share, $path_string)
 // returns the file size or number of files in the folder
 function getFileSize($share, $path_string)
 {
-	//TODO: finish this
-	return 0;
-
 	switch (getBasicFileType($share, $path_string))
 	{
 		case 'root_directory':
 			return getNumberOfVisibleShares();
 			break;
 		case 'directory':
-			//
+			$fs_path = getFsPath($share, $path_string);
+			if (is_readable($fs_path))
+			{
+				return (count(scandir($fs_path)) - 2); // This might be different on Windows
+			}
+			return null;
 			break;
 		case 'file':
-			//
+			$fs_path = getFsPath($share, $path_string);
+			return filesize($fs_path);
 			break;
 		default:
 			return null;
@@ -161,7 +165,7 @@ function getFileModificationTime($share, $path_string)
 {
 	if ($share === '')
 	{
-		// (there is no need of this though)
+		// (there is actually no need of this)
 		return null;
 	}
 	$fs_path = getFsPath($share, $path_string);

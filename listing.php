@@ -26,12 +26,23 @@ function outputListing($body)
 function serveShareListing()
 {
 	$shares = getShareList();
-	$listing = '<table>';
+	$listing = '<table>'.
+			'<tr>'.
+			'<th>Name</th>'.
+			'<th>Size</th>'.
+			'<th>Last Modified</th>'.
+			'<th>Download</th>'.
+			'</tr>';
 	foreach ($shares as $share)
 	{
 		if (canViewShare($share['name']))
 		{
-			$listing .= '<tr><td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td></tr>';
+			$listing .= '<tr>'.
+					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
+					'<td></td>'.
+					'<td><em>N/A</em></td>'.
+					'<td><em>N/A</em></td>'.
+					'</tr>';
 		}
 	}
 	$listing .= '</table>';
@@ -40,9 +51,19 @@ function serveShareListing()
 
 function serveDirectoryListing($share, $path)
 {
-	$listing = '<table>';
+	$date_format = 'Y-m-d h:i';
+
+	$listing = '<table>'.
+			'<tr>'.
+			'<th>Name</th>'.
+			'<th>Last Modified</th>'.
+			'<th>Size</th>'.
+			'<th>Download</th>'.
+			'</tr>';
 	$listing .= '<tr>'.
 			'<td><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></td>'.
+			'<td></td>'.
+			'<td></td>'.
 			'<td></td>'.
 			'</tr>';
 	// check if the share is readable (note: not necessarily visible)
@@ -58,6 +79,8 @@ function serveDirectoryListing($share, $path)
 					// add the session id and open in new tab
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
+							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
+							'<td>'.htmlentities($file['size']).'</td>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
 							'</tr>';
 				}
@@ -66,13 +89,18 @@ function serveDirectoryListing($share, $path)
 					// just open in the same tab
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
+							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
+							'<td>'.htmlentities($file['size']).'</td>'.
 							'<td></td>'.
 							'</tr>';
 				}
 				else
 				{
+					// the "?"s avoid causing potential errors
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></td>'.
+							'<td>?</td>'.
+							'<td>?</td>'.
 							'<td></td>'.
 							'</tr>';
 				}
@@ -81,13 +109,13 @@ function serveDirectoryListing($share, $path)
 		else
 		{
 			http_response_code(404);
-			$listing .= '<tr><td><span style="font-size: large;">Error: Either the file or folder "/' . htmlentities(shareStringAndPathStringToFullPathString($share, $path)) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
+			$listing .= '<tr><td colspan="4"><span class="error">Error: Either the file or folder "/' . htmlentities(shareStringAndPathStringToFullPathString($share, $path)) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
 		}
 	}
 	else
 	{
 		http_response_code(404);
-		$listing .= '<tr><td><span style="font-size: large;">Error: Either the share "' . htmlentities($share) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
+		$listing .= '<tr><td colspan="4"><span class="error">Error: Either the share "' . htmlentities($share) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
 	}
 	$listing .= '</table>';
 	outputListing($listing);
