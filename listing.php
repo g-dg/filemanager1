@@ -43,18 +43,20 @@ function outputListing($body)
 function serveShareListing()
 {
 	$shares = getShareList();
-	$listing = '<table>'.
+	$listing = '<table><thead>'.
 			'<tr>'.
+			'<th></th>'.
 			'<th>Name</th>'.
 			'<th>Last Modified</th>'.
 			'<th>Size</th>'.
 			'<th>Download</th>'.
-			'</tr>';
+			'</tr></thead><tbody>';
 	foreach ($shares as $share)
 	{
 		if (canViewShare($share['name']))
 		{
 			$listing .= '<tr>'.
+					'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</td>'.
 					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
 					'<td><em>N/A</em></td>'.
 					'<td>'.htmlentities(prettifyFileSize(getFileSize($share['name'], ''))).'</td>'.
@@ -62,7 +64,7 @@ function serveShareListing()
 					'</tr>';
 		}
 	}
-	$listing .= '</table>';
+	$listing .= '</tbody></table>';
 	outputListing($listing);
 }
 
@@ -70,14 +72,16 @@ function serveDirectoryListing($share, $path)
 {
 	$date_format = 'Y-m-d h:i';
 
-	$listing = '<table>'.
+	$listing = '<table><thead>'.
 			'<tr>'.
+			'<th></th>'.
 			'<th>Name</th>'.
 			'<th>Last Modified</th>'.
 			'<th>Size</th>'.
 			'<th>Download</th>'.
-			'</tr>';
+			'</tr></thead><tbody>';
 	$listing .= '<tr>'.
+			'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></td>'.
 			'<td><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></td>'.
 			'<td></td>'.
 			'<td></td>'.
@@ -95,6 +99,7 @@ function serveDirectoryListing($share, $path)
 				{
 					// add the session id and open in new tab
 					$listing .= '<tr>'.
+							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></td>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
 							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
 							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
@@ -105,6 +110,7 @@ function serveDirectoryListing($share, $path)
 				{
 					// just open in the same tab
 					$listing .= '<tr>'.
+							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></td>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
 							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
 							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
@@ -115,6 +121,7 @@ function serveDirectoryListing($share, $path)
 				{
 					// the "?"s avoid causing potential errors
 					$listing .= '<tr>'.
+							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></td>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></td>'.
 							'<td>?</td>'.
 							'<td>?</td>'.
@@ -134,6 +141,6 @@ function serveDirectoryListing($share, $path)
 		http_response_code(404);
 		$listing .= '<tr><td colspan="4"><span class="error">Error: Either the share "' . htmlentities($share) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
 	}
-	$listing .= '</table>';
+	$listing .= '</tbody></table>';
 	outputListing($listing);
 }
