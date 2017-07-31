@@ -18,6 +18,23 @@ as of 1.5:
 'last_modified' => last modified time (as int UNIX timestamp)
 */
 
+function prettifyFileSize($size)
+{
+	if ($size < (2**10))
+	{
+		return $size;
+	}
+	if ($size < (2**20))
+	{
+		return sprintf("%01.1fK", ($size / (2**10)));
+	}
+	if ($size < (2**30))
+	{
+		return sprintf("%01.1fM", ($size / (2**20)));
+	}
+	return sprintf("%01.1fG", ($size / (2**30)));
+}
+
 function outputListing($body)
 {
 	echo getStandardTemplateHeader('/'.$GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
@@ -40,7 +57,7 @@ function serveShareListing()
 			$listing .= '<tr>'.
 					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
 					'<td><em>N/A</em></td>'.
-					'<td>'.getFileSize($share['name'], '').'</td>'.
+					'<td>'.htmlentities(prettifyFileSize(getFileSize($share['name'], ''))).'</td>'.
 					'<td><em>N/A</em></td>'.
 					'</tr>';
 		}
@@ -80,7 +97,7 @@ function serveDirectoryListing($share, $path)
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
 							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-							'<td>'.htmlentities($file['size']).'</td>'.
+							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
 							'</tr>';
 				}
@@ -90,7 +107,7 @@ function serveDirectoryListing($share, $path)
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
 							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-							'<td>'.htmlentities($file['size']).'</td>'.
+							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
 							'<td></td>'.
 							'</tr>';
 				}
