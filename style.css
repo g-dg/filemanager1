@@ -101,11 +101,11 @@ button {
 	margin-left: auto;
 	margin-right: auto;
 }
-@media (max-width: 500px) {
+@media (max-width: 768px) {
 	.login {
 		width: 67%;
 	}
-	.content form.standard label{
+	.login .content form.standard label{
 		text-align: center;
 	}
 }
