@@ -15,7 +15,7 @@ require_once('template.php');
 
 function outputListing($body)
 {
-	echo getStandardTemplateHeader($GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
+	echo getStandardTemplateHeader('/'.$GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
 }
 
 function serveShareListing()
