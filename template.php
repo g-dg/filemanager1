@@ -66,7 +66,7 @@ function getStandardTemplateFooter()
 	if (GD_FILEMANAGER_PROFILER_ENABLE)
 	{
 		$footer .= '			<br />
-			Page generated in '.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).'seconds.
+			Page generated in '.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).' seconds.
 ';
 	}
 	$footer .= '		</div>
