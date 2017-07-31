@@ -175,7 +175,9 @@ function getDirectoryListing($share, $path_string)
 	{
 		$listing[] = array('name' => $filename,
 				'uri' => getHttpUri($share . '/' . $path_string . '/' . $filename), //TODO: fix '//'s in the root of the shares (not critical, as it gets handled by the sanitizer)
-				'basic_type' => getBasicFileType($share, $path_string . '/' . $filename));
+				'basic_type' => getBasicFileType($share, $path_string . '/' . $filename),
+				'size' => null,
+				'last_modified' => null);
 	}
 	// sort the listing
 	usort($listing, function($a,$b){return strcasecmp($a['name'],$b['name']);});
