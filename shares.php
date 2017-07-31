@@ -96,3 +96,42 @@ function canEditShare($share)
 		return false;
 	}
 }
+
+function getNumberOfVisibleShares()
+{
+	$visible_share_count = 0;
+	foreach ($_SESSION['shares'] as $share)
+	{
+		if (canViewShare($share['NAME']))
+		{
+			$visible_share_count++;
+		}
+	}
+	return $visible_share_count;
+}
+
+function getNumberOfReadableShares()
+{
+	$visible_share_count = 0;
+	foreach ($_SESSION['shares'] as $share)
+	{
+		if (canReadShare($share['NAME']))
+		{
+			$visible_share_count++;
+		}
+	}
+	return $visible_share_count;
+}
+
+function getNumberOfEditableShares()
+{
+	$visible_share_count = 0;
+	foreach ($_SESSION['shares'] as $share)
+	{
+		if (canEditShare($share['NAME']))
+		{
+			$visible_share_count++;
+		}
+	}
+	return $visible_share_count;
+}

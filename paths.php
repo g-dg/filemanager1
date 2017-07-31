@@ -137,13 +137,36 @@ function getBasicFileType($share, $path_string)
 // returns the file size or number of files in the folder
 function getFileSize($share, $path_string)
 {
-	return 0; //TODO: actually code this
+	//TODO: finish this
+	return 0;
+	
+	switch (getBasicFileType($share, $path_string))
+	{
+		case 'root_directory':
+			//
+			break;
+		case 'directory':
+			//
+			break;
+		case 'file':
+			//
+			break;
+		default:
+			return null;
+	}
 }
 
 // returns the last modified time as a UNIX timestamp
 function getFileModificationTime($share, $path_string)
 {
-	return time(); //TODO: actually code this
+	if ($share === '')
+	{
+		// return the number of visible shares
+		// (there is no need of this though)
+		return getNumberOfVisibleShares();
+	}
+	$fs_path = getFsPath($share, $path_string);
+	return (filemtime($fs_path));
 }
 
 // doesn't actually urlencode it, just escapes the quotes
