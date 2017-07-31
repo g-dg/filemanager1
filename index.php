@@ -1,5 +1,5 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.0.2');
+define('GD_FILEMANAGER_VERSION', '1.0.3');
 
 // load various required files
 require_once('config.php');
