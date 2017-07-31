@@ -29,8 +29,8 @@ function serveShareListing()
 	$listing = '<table>'.
 			'<tr>'.
 			'<th>Name</th>'.
-			'<th>Size</th>'.
 			'<th>Last Modified</th>'.
+			'<th>Size</th>'.
 			'<th>Download</th>'.
 			'</tr>';
 	foreach ($shares as $share)
