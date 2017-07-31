@@ -161,9 +161,9 @@ function getFileModificationTime($share, $path_string)
 {
 	if ($share === '')
 	{
-		// return the number of visible shares
+		// return null
 		// (there is no need of this though)
-		return 0;
+		return null;
 	}
 	$fs_path = getFsPath($share, $path_string);
 	return (filemtime($fs_path));
