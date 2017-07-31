@@ -40,7 +40,7 @@ function serveShareListing()
 			$listing .= '<tr>'.
 					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
 					'<td><em>N/A</em></td>'.
-					'<td></td>'.
+					'<td>'.getFileSize($share['name'], '').'</td>'.
 					'<td><em>N/A</em></td>'.
 					'</tr>';
 		}
