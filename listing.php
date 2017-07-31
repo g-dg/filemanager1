@@ -5,6 +5,8 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
+require_once('template.php');
+
 /* Listing arrays have:
  * 'name' => displayed name
  * 'uri' => full, http- and href-ready uri\
@@ -13,44 +15,7 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 
 function outputListing($body)
 {
-	$listing_head = '<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width"></meta>
-		<title>/'.$GLOBALS['requested_full_path'].' - Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'</title>
-		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'"></link>
-	</head>
-	<body>
-		<div class="header">
-			<div class="tools">
-				<ul>';
-	$listing_head .= '<li>Currently logged in as "'.htmlentities($_SESSION['username']).'"</li>';
-	/*if (canEditShare($GLOBALS['requested_share']))
-	{
-		$listing_head .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/upload.php?path='.urlencode($GLOBALS['requested_full_path']).'').'">Upload</a></li>';
-	}*/
-	if (inGroup('root'))
-	{
-		$listing_head .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></li>';
-	}
-	$listing_head .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></li>';
-	$listing_head .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></li>';
-	$listing_head .= '</ul>
-			</div>
-			<div class="title">/'.htmlentities($GLOBALS['requested_full_path']).' - Garnet DeGelder\'s File Manager on '.htmlentities($_SERVER['HTTP_HOST']).'</div>
-		</div>
-		<div class="content">
-		';
-	$listing_tail = '
-		</div>
-		<div class="footer">
-			Copyright &copy; 2017  Garnet DeGelder
-		</div>
-	</body>
-</html>
-';
-	echo $listing_head . $body . $listing_tail;
+	echo getStandardTemplateHeader($GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
 }
 
 function serveShareListing()

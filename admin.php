@@ -1,10 +1,12 @@
 <?php
+
 require_once('version.php');
 
 require_once('config.php');
 require_once('session.php');
 require_once('database.php');
 require_once('auth.php');
+require_once('template.php');
 startSession();
 checkUserIP();
 authenticate();
@@ -164,66 +166,33 @@ function getFullShareList()
 	return $html_listing . '</tbody></table><input type="hidden" name="share_ids" value="'.implode(',', $share_ids).'"></input>'.PHP_EOL;
 }
 
-?><!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width"></meta>
-		<title>Administration - Garnet DeGelder's File Manager <?=htmlentities(GD_FILEMANAGER_VERSION);?></title>
-		<link rel="stylesheet" type="text/css" href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css');?>"></link>
-	</head>
-	<body>
-		<div class="header">
-			<div class="tools">
-				<ul>
-					<li>
-						Currently logged in as "<?=htmlentities($_SESSION['username']);?>"
-					</li>
-<?php if (inGroup('root')) { ?>
-					<li>
-						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php');?>">Administration</a>
-					</li>
-<?php } ?>
-					<li>
-						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php');?>">My Account</a>
-					</li>
-					<li>
-						<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php');?>">Log Out</a>
-					</li>
-				</ul>
-			</div>
-			<div class="title">
-				Administration - Garnet DeGelder's File Manager on <?=htmlentities($_SERVER['HTTP_HOST']).PHP_EOL;?>
-			</div>
-		</div>
-		<div class="content">
-			<a href="<?=htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']);?>">&lt; Back to main listing</a>
-			<br />
-			<br />
-<?php if (isset($_GET['msg'])) { ?>
-			<div style="font-size: large;"><?=htmlentities($_GET['msg']);?></div>
-			<br />
-<?php } ?>
-			<noscript><div style="font-size: large;"><em>Note: You will not be asked for confirmation.</em></div><br /></noscript>
-			<form action="admin_backend.php" method="post">
-				<div style="overflow: auto;">
-					<fieldset>
-						<legend>Users</legend>
-						<?=getUserList();?>
-					</fieldset>
-				</div>
-				<br />
-				<div style="overflow: auto;">
-					<fieldset>
-						<legend>Shares</legend>
-						<?=getFullShareList();?>
-					</fieldset>
-				</div>
-				<br />
-			</form>
-		</div>
-		<div class="footer">
-			Copyright &copy; 2017  Garnet DeGelder
-		</div>
-	</body>
-</html>
+echo getStandardTemplateHeader('Administration');
+
+echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'">&lt; Back to main listing</a>
+<br />
+<br />
+';
+if (isset($_GET['msg'])) {
+	echo '<div style="font-size: large;">'.htmlentities($_GET['msg']).'</div>
+<br />
+';
+}
+echo '<noscript><div style="font-size: large;"><em>Note: You will not be asked for confirmation.</em></div><br /></noscript>
+<form action="admin_backend.php" method="post">
+	<div style="overflow: auto;">
+		<fieldset>
+			<legend>Users</legend>
+			'.getUserList().'
+		</fieldset>
+	</div>
+	<br />
+	<div style="overflow: auto;">
+		<fieldset>
+			<legend>Shares</legend>
+			'.getFullShareList().'
+		</fieldset>
+	</div>
+	<br />
+</form>';
+
+echo getStandardTemplateFooter();
