@@ -12,10 +12,10 @@ function getStandardTemplateHeader($title)
 	$header = '<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width"></meta>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
 		<title>'.htmlentities($title).' - Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'</title>
-		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'"></link>
+		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'">
 	</head>
 	<body>
 		<div class="header">
@@ -42,10 +42,10 @@ function getLoginTemplateHeader()
 	$header = '<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8"></meta>
-		<meta name="viewport" content="width=device-width"></meta>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
 		<title>Log In to Garnet DeGelder\'s File Manager</title>
-		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'"></link>
+		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'">
 	</head>
 	<body class="login">
 		<div class="header">

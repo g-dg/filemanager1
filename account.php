@@ -38,16 +38,16 @@ if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 		<label>
 			Current Password:
 		</label>
-		<input type="password" name="old_password" value="" autofocus="autofocus"></input>
+		<input type="password" name="old_password" value="" autofocus="autofocus">
 		<label>
 			New Password: 
 		</label>
-		<input type="password" name="new_password1" value=""></input>
+		<input type="password" name="new_password1" value="">
 		<label>
 			New Password (again): 
 		</label>
-		<input type="password" name="new_password2" value=""></input>
-		<input type="submit" name="submit" value="Change Password" style="width: 100%;"></input>
+		<input type="password" name="new_password2" value="">
+		<input type="submit" name="submit" value="Change Password" style="width: 100%;">
 	</fieldset>';
 }
 	$body .= '	<fieldset>

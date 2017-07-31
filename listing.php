@@ -53,7 +53,7 @@ function serveDirectoryListing($share, $path)
 					// add the session id and open in new tab
 					$listing .= '<tr>'.
 							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
-							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&download">Download</a></td>'.
+							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
 							'</tr>';
 				}
 				else if ($file['basic_type'] === 'directory')
