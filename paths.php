@@ -161,7 +161,6 @@ function getFileModificationTime($share, $path_string)
 {
 	if ($share === '')
 	{
-		// return null
 		// (there is no need of this though)
 		return null;
 	}
