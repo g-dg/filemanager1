@@ -134,6 +134,18 @@ function getBasicFileType($share, $path_string)
 	}
 }
 
+// returns the file size or number of files in the folder
+function getFileSize($share, $path_string)
+{
+	return 0; //TODO: actually code this
+}
+
+// returns the last modified time as a UNIX timestamp
+function getFileModificationTime($share, $path_string)
+{
+	return time(); //TODO: actually code this
+}
+
 // doesn't actually urlencode it, just escapes the quotes
 function urlencodeHttpPath($path_string)
 {
