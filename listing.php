@@ -22,10 +22,14 @@ as of 1.5:
 function sortNameAsc($listing)
 {
 	// A-Z
+	usort($listing, function($a,$b){return strcasecmp($a['name'],$b['name']);});
+	return $listing;
 }
 function sortNameDesc($listing)
 {
 	// Z-A
+	usort($listing, function($a,$b){return strcasecmp($b['name'],$a['name']);});
+	return $listing;
 }
 function sortDateAsc($listing)
 {
