@@ -62,6 +62,8 @@ function getStandardTemplateFooter()
 	$footer = '
 		</div>
 		<div class="footer">
+			Garnet DeGelder\'s File Manager version '.htmlentities(GD_FILEMANAGER_VERSION).'
+			<br />
 			Copyright &copy; 2017  Garnet DeGelder
 ';
 	if (GD_FILEMANAGER_PROFILER_ENABLE)
