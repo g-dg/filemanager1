@@ -34,25 +34,25 @@ function sortNameDesc($listing)
 function sortDateAsc($listing)
 {
 	// earlier to later
-	usort($listing, function($a,$b){return $b['last_modified'] - $a['last_modified'];});
+	usort($listing, function($a,$b){return $a['last_modified'] - $b['last_modified'];});
 	return $listing;
 }
 function sortDateDesc($listing)
 {
 	// later to earlier
-	usort($listing, function($a,$b){return $a['last_modified'] - $b['last_modified'];});
+	usort($listing, function($a,$b){return $b['last_modified'] - $a['last_modified'];});
 	return $listing;
 }
 function sortSizeAsc($listing)
 {
 	// less to greater
-	usort($listing, function($a,$b){return $b['size'] - $a['size'];});
+	usort($listing, function($a,$b){return $a['size'] - $b['size'];});
 	return $listing;
 }
 function sortSizeDesc($listing)
 {
 	// greater to less
-	usort($listing, function($a,$b){return $a['size'] - $b['size'];});
+	usort($listing, function($a,$b){return $b['size'] - $a['size'];});
 	return $listing;
 }
 
