@@ -18,6 +18,32 @@ as of 1.5:
 'last_modified' => last modified time (as int UNIX timestamp)
 */
 
+// sort functions
+function sortNameAsc($listing)
+{
+	// A-Z
+}
+function sortNameDesc($listing)
+{
+	// Z-A
+}
+function sortDateAsc($listing)
+{
+	// earlier to later
+}
+function sortDateDesc($listing)
+{
+	// later to earlier
+}
+function sortSizeAsc($listing)
+{
+	// less to greater
+}
+function sortSizeDesc($listing)
+{
+	// greater to less
+}
+
 function prettifyFileSize($size)
 {
 	if ($size < (2**10))
