@@ -56,6 +56,54 @@ function sortSizeDesc($listing)
 	return $listing;
 }
 
+function sortListing($listing, $field, $order)
+{
+	switch ($field)
+	{
+		case 'name':
+			switch ($order)
+			{
+				case 'asc':
+					return sortNameAsc($listing);
+					break;
+				case 'desc':
+					return sortNameDesc($listing);
+					break;
+				default:
+					return $listing;
+			}
+			break;
+		case 'last-modified':
+			switch ($order)
+			{
+				case 'asc':
+					return sortDateAsc($listing);
+					break;
+				case 'desc':
+					return sortDateDesc($listing);
+					break;
+				default:
+					return $listing;
+			}
+			break;
+		case 'size':
+			switch ($order)
+			{
+				case 'asc':
+					return sortSizeAsc($listing);
+					break;
+				case 'desc':
+					return sortSizeDesc($listing);
+					break;
+				default:
+					return $listing;
+			}
+			break;
+		default:
+			return $listing;
+	}
+}
+
 function prettifyFileSize($size)
 {
 	if ($size < (2**10))
