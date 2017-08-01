@@ -103,6 +103,14 @@ function sortListing($listing, $field, $order)
 			return $listing;
 	}
 }
+function sortListingAsRequested($listing)
+{
+	if (isset($_GET['sort'], $_GET['order']))
+	{
+		return sortListing($listing, $_GET['sort'], $_GET['order']);
+	}
+	return $listing;
+}
 
 function prettifyFileSize($size)
 {
@@ -128,7 +136,7 @@ function outputListing($body)
 
 function serveShareListing()
 {
-	$shares = getShareList();
+	$shares = sortListingAsRequested(getShareList());
 	$listing = '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
@@ -176,7 +184,7 @@ function serveDirectoryListing($share, $path)
 	// check if the share is readable (note: not necessarily visible)
 	if (canReadShare($share))
 	{
-		$dir_list = getDirectoryListing($share, $path);
+		$dir_list = sortListingAsRequested(getDirectoryListing($share, $path));
 		if ($dir_list !== false)
 		{
 			foreach ($dir_list as $file)
