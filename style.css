@@ -2,7 +2,6 @@
 
 body{
 	margin: .5rem;
-	margin-bottom: 3rem;
 }
 
 .header {
@@ -95,6 +94,7 @@ button {
 	font-style: italic;
 	color: gray;
 	padding-top: .33em;
+	margin-bottom: 1em;
 }
 
 .login {
