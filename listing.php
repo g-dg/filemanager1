@@ -34,18 +34,26 @@ function sortNameDesc($listing)
 function sortDateAsc($listing)
 {
 	// earlier to later
+	usort($listing, function($a,$b){return $b['name'] - $a['name'];});
+	return $listing;
 }
 function sortDateDesc($listing)
 {
 	// later to earlier
+	usort($listing, function($a,$b){return $a['name'] - $b['name'];});
+	return $listing;
 }
 function sortSizeAsc($listing)
 {
 	// less to greater
+	usort($listing, function($a,$b){return $b['name'] - $a['name'];});
+	return $listing;
 }
 function sortSizeDesc($listing)
 {
 	// greater to less
+	usort($listing, function($a,$b){return $a['name'] - $b['name'];});
+	return $listing;
 }
 
 function prettifyFileSize($size)
