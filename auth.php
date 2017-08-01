@@ -54,9 +54,6 @@ function authenticate()
 		// get the list of shares (we don't want to do database querys if we can help it)
 		$_SESSION['shares'] = dbQuery('select * from "SHARES";');
 		
-		// sort the shares
-		usort($_SESSION['shares'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
-		
 		// return that the authentication was successful
 		return true;
 	}

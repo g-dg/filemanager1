@@ -284,7 +284,6 @@ if (processAdminInput() === true)
 {
 	// reload shares
 	$_SESSION['shares'] = dbQuery('select * from "SHARES";');
-	usort($_SESSION['shares'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
 	
 	header('Location: admin.php?msg='.urlencode('The last action completed successfully.'));
 	exit();

@@ -217,8 +217,6 @@ function getDirectoryListing($share, $path_string)
 				'size' => getFileSize($share, $path_string . '/' . $filename),
 				'last_modified' => getFileModificationTime($share, $path_string . '/' . $filename));
 	}
-	// sort the listing
-	usort($listing, function($a,$b){return strcasecmp($a['name'],$b['name']);});
 	return $listing;
 }
 
