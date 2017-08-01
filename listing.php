@@ -109,7 +109,7 @@ function sortListingAsRequested($listing)
 	{
 		return sortListing($listing, $_GET['sort'], $_GET['order']);
 	}
-	return $listing;
+	return sortListing($listing, 'name', 'asc');
 }
 
 function prettifyFileSize($size)
