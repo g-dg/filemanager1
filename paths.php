@@ -237,3 +237,8 @@ function getParentHttpUri($path_string)
 	array_pop($full_path_array);
 	return $GLOBALS['http_uri_prefix'] . pathArrayToString($full_path_array);
 }
+
+function getCurrentHttpUri()
+{
+	return getHttpUri($GLOBALS['requested_full_path']);
+}

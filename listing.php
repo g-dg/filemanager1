@@ -129,6 +129,28 @@ function prettifyFileSize($size)
 	return sprintf("%01.1fG", ($size / (2**30)));
 }
 
+function getNextSortRequestString($field)
+{
+	$currentOrder = 'asc';
+	if (isset($_GET['order']))
+	{
+		$currentOrder = $_GET['order'];
+	}
+	$newOrder = $currentOrder;
+	switch ($currentOrder)
+	{
+		case 'asc':
+			$newOrder = 'desc';
+			break;
+		case 'desc':
+			$newOrder = 'asc';
+			break;
+		default:
+			$newOrder = 'desc';
+	}
+	return 'sort='.urlencode($field).'&order='.urlencode($newOrder);
+}
+
 function outputListing($body)
 {
 	echo getStandardTemplateHeader('/'.$GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
@@ -140,9 +162,9 @@ function serveShareListing()
 	$listing = '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
-			'<th>Name</th>'.
-			'<th>Last Modified</th>'.
-			'<th>Size</th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
 			'<th>Download</th>'.
 			'</tr></thead><tbody>';
 	foreach ($shares as $share)
@@ -169,9 +191,9 @@ function serveDirectoryListing($share, $path)
 	$listing = '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
-			'<th>Name</th>'.
-			'<th>Last Modified</th>'.
-			'<th>Size</th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
+			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
 			'<th>Download</th>'.
 			'</tr></thead><tbody>';
 	$listing .= '<tr>'.
