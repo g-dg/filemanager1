@@ -261,14 +261,14 @@ function serveDirectoryListing($share, $path)
 		}
 		else
 		{
-			http_response_code(404);
-			$listing .= '<tr><td colspan="4"><span class="error">Error: Either the file or folder "/' . htmlentities(shareStringAndPathStringToFullPathString($share, $path)) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
+			require_once('notfound.php');
+			serveNotFoundMessage();
 		}
 	}
 	else
 	{
-		http_response_code(404);
-		$listing .= '<tr><td colspan="4"><span class="error">Error: Either the share "' . htmlentities($share) . '" does not exist, or you don\'t have permission to view it.</span></td></tr>';
+		require_once('notfound.php');
+		serveNotFoundMessage();
 	}
 	$listing .= '</tbody></table>';
 	outputListing($listing);

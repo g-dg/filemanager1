@@ -14,7 +14,8 @@ function sanitizePathArray($dirty_path_array)
 	foreach ($dirty_path_array as $pathpart)
 	{
 		if ($pathpart !== '' &&
-				substr($pathpart, 0, 1) !== '.') {
+				$pathpart != '.' &&
+				$pathpart != '..') {
 			$clean_path_array[] = $pathpart;
 		}
 	}
@@ -184,7 +185,7 @@ function getFileModificationTime($share, $path_string)
 		return null;
 	}
 	$fs_path = getFsPath($share, $path_string);
-	return (filemtime($fs_path));
+	return (@filemtime($fs_path));
 }
 
 // doesn't actually urlencode it, just escapes the quotes
@@ -221,17 +222,21 @@ function getDirectoryListing($share, $path_string)
 	{
 		return false;
 	}
-	$raw_file_listing = scandir($fs_path);
-	$clean_file_listing = sanitizePathArray($raw_file_listing);
+
 	$listing = array();
-	foreach ($clean_file_listing as $filename)
-	{
-		$listing[] = array('name' => $filename,
-				'uri' => getHttpUri($share . '/' . $path_string . '/' . $filename), //TODO: fix '//'s in the root of the shares (not critical, as it gets handled by the sanitizer)
-				'basic_type' => getBasicFileType($share, $path_string . '/' . $filename),
-				'size' => getFileSize($share, $path_string . '/' . $filename),
-				'last_modified' => getFileModificationTime($share, $path_string . '/' . $filename));
+	if ($handle = opendir($fs_path)) {
+		while (($filename = readdir($handle)) !== false) {
+			if ($filename != "." && $filename != "..") {
+				$listing[] = array('name' => $filename,
+						'uri' => getHttpUri($share . '/' . $path_string . '/' . $filename), //TODO: fix '//'s in the root of the shares (not critical, as it gets handled by the sanitizer)
+						'basic_type' => getBasicFileType($share, $path_string . '/' . $filename),
+						'size' => getFileSize($share, $path_string . '/' . $filename),
+						'last_modified' => getFileModificationTime($share, $path_string . '/' . $filename));
+			}
+		}
+		closedir($handle);
 	}
+
 	return $listing;
 }
 

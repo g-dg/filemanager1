@@ -37,8 +37,8 @@ function route() {
 		}
 		else
 		{
-			require_once('listing.php');
-			serveDirectoryListing($GLOBALS['requested_share'], $GLOBALS['requested_path']);
+			require_once('notfound.php');
+			serveNotFoundMessage();
 		}
 	}
 }
