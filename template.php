@@ -57,6 +57,42 @@ function getLoginTemplateHeader()
 	return $header;
 }
 
+function getColourExecTime()
+{
+	$execTime = microtime(true) - $GLOBALS['script_start_time'];
+	if ($execTime <= 0.125)
+	{
+		return '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	if ($execTime <= 0.250)
+	{
+		return '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	if ($execTime <= 0.500)
+	{
+		return '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	return '<span style="color:#ff0000;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+}
+
+function getColourMemuse()
+{
+	$memUse = round(memory_get_peak_usage() / 1024);
+	if ($memUse <= 1024)
+	{
+		return '<span style="color:#00cc00;">Max memory usage: ~'.$memUse.' KB.</span>';
+	}
+	if ($memUse <= 2048)
+	{
+		return '<span style="color:#ffd700;">Max memory usage: ~'.$memUse.' KB.</span>';
+	}
+	if ($memUse <= 4096)
+	{
+		return '<span style="color:#ff7f00;">Max memory usage: ~'.$memUse.' KB.</span>';
+	}
+	return '<span style="color:#ff0000;">Max memory usage: ~'.$memUse.' KB.</span>';
+}
+
 function getStandardTemplateFooter()
 {
 	$footer = '
@@ -68,8 +104,8 @@ function getStandardTemplateFooter()
 	if (GD_FILEMANAGER_PROFILER_ENABLE)
 	{
 		$footer .= '			<br />
-			Page generated in ~'.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).' seconds.
-			Max memory usage: ~'.round(memory_get_peak_usage() / 1024).' KB.
+			'.getColourExecTime().'
+			'.getColourMemuse().'
 ';
 	}
 	$footer .= '		</div>
