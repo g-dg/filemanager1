@@ -292,7 +292,7 @@ function serveDirectoryListing($share, $path)
 						// the "?"s avoid causing potential errors
 						$listing .= '<tr>'.
 								'<td><span title="Unknown"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></span></td>'.
-								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
+								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
 								'<td><span title="Unknown time last modified">?</span></td>'.
 								'<td><span title="Unknown size">?</span></td>'.
 								'<td><span title="Download not available"><em>N/A</em></span></td>'.
