@@ -142,6 +142,11 @@ function prettifyFileCount($count)
 	return sprintf("%01.1fM", ($count / (10**6)));
 }
 
+function prettifyDate($date)
+{
+	return date(GD_FILEMANAGER_DATE_FORMAT, $date);
+}
+
 function getNextSortRequestString($field)
 {
 	$currentOrder = 'asc';
@@ -175,21 +180,21 @@ function serveShareListing()
 	$listing = '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
-			'<th>Download</th>'.
+			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
+			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
+			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
+			'<th><span title="Download">Download</span></th>'.
 			'</tr></thead><tbody>';
 	foreach ($shares as $share)
 	{
 		if (canViewShare($share['name']))
 		{
 			$listing .= '<tr>'.
-					'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</td>'.
-					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
-					'<td><em>N/A</em></td>'.
-					'<td>'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</td>'.
-					'<td><em>N/A</em></td>'.
+					'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</span></td>'.
+					'<td><span title="'.htmlentities($share['name']).'/"><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></span></td>'.
+					'<td><span title="Last modification time not available"><em>N/A</em></span></td>'.
+					'<td><span title="Contains '.htmlentities(getFileSize($share['name'], '')).' files">'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</span></td>'.
+					'<td><span title="Download not available"><em>N/A</em></span></td>'.
 					'</tr>';
 		}
 	}
@@ -199,19 +204,17 @@ function serveShareListing()
 
 function serveDirectoryListing($share, $path)
 {
-	$date_format = 'Y-m-d h:i';
-
 	$listing = '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
-			'<th>Download</th>'.
+			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
+			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
+			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
+			'<th><span title="Download">Download</span></th>'.
 			'</tr></thead><tbody>';
 	$listing .= '<tr>'.
-			'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></td>'.
-			'<td><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></td>'.
+			'<td><span title="Back"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></span></td>'.
+			'<td><span title="Go back up a directory"><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></span></td>'.
 			'<td></td>'.
 			'<td></td>'.
 			'<td></td>'.
@@ -230,33 +233,33 @@ function serveDirectoryListing($share, $path)
 					{
 						// add the session id and open in new tab
 						$listing .= '<tr>'.
-								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></td>'.
-								'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
-								'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-								'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
-								'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
+								'<td><span title="File"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></span></td>'.
+								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></span></td>'.
+								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
+								'<td><span title="'.htmlentities($file['size']).' bytes">'.htmlentities(prettifyFileSize($file['size'])).'</span></td>'.
+								'<td><span title="Download '.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></span></td>'.
 								'</tr>';
 					}
 					else if ($file['basic_type'] === 'directory')
 					{
 						// just open in the same tab
 						$listing .= '<tr>'.
-								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></td>'.
-								'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
-								'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-								'<td>'.htmlentities(prettifyFileCount($file['size'])).'</td>'.
-								'<td></td>'.
+								'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></span></td>'.
+								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></span></td>'.
+								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
+								'<td><span title="Contains '.htmlentities($file['size']).' files">'.htmlentities(prettifyFileCount($file['size'])).'</span></td>'.
+								'<td><span title="Download not available"><em>N/A</em></span></td>'.
 								'</tr>';
 					}
 					else
 					{
 						// the "?"s avoid causing potential errors
 						$listing .= '<tr>'.
-								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></td>'.
-								'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></td>'.
-								'<td>?</td>'.
-								'<td>?</td>'.
-								'<td></td>'.
+								'<td><span title="Unknown"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></span></td>'.
+								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
+								'<td><span title="Unknown time last modified">?</span></td>'.
+								'<td><span title="Unknown size">?</span></td>'.
+								'<td><span title="Download not available"><em>N/A</em></span></td>'.
 								'</tr>';
 					}
 				}
