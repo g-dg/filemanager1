@@ -71,6 +71,9 @@ function getStandardTemplateFooter()
 		$footer .= '			<br />
 			Page generated in '.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).' seconds.
 ';
+		$footer .= '			<br />
+			Max memory usage: '.sprintf("%01.0f KB", memory_get_peak_usage() / 1024).'.
+';
 	}
 	$footer .= '		</div>
 	</body>
