@@ -62,17 +62,14 @@ function getStandardTemplateFooter()
 	$footer = '
 		</div>
 		<div class="footer">
-			Garnet DeGelder\'s File Manager version '.htmlentities(GD_FILEMANAGER_VERSION).'
-			<br />
-			Copyright &copy; 2017  Garnet DeGelder
+			Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'
+			Copyright &copy; 2017 Garnet DeGelder
 ';
 	if (GD_FILEMANAGER_PROFILER_ENABLE)
 	{
 		$footer .= '			<br />
-			Page generated in '.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).' seconds.
-';
-		$footer .= '			<br />
-			Max memory usage: '.sprintf("%01.0f KB", memory_get_peak_usage() / 1024).'.
+			Page generated in ~'.sprintf("%.4f", (microtime(true) - $GLOBALS['script_start_time'])).' seconds.
+			Max memory usage: ~'.round(memory_get_peak_usage() / 1024).' KB.
 ';
 	}
 	$footer .= '		</div>
