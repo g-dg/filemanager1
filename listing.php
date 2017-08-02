@@ -139,11 +139,7 @@ function prettifyFileCount($count)
 	{
 		return sprintf("%01.1fK", ($count / (10**3)));
 	}
-	if ($count < (10**9))
-	{
-		return sprintf("%01.1fM", ($count / (10**6)));
-	}
-	return sprintf("%01.1fG", ($count / (10**9)));
+	return sprintf("%01.1fM", ($count / (10**6)));
 }
 
 function getNextSortRequestString($field)
