@@ -144,7 +144,10 @@ function dirSize($fs_path)
 	{
 		while (($entry = readdir($handle)) !== false)
 		{
-			if ($entry != "." && $entry != "..")
+			if ($entry != "." &&
+					$entry != ".." &&
+					(!GD_FILEMANAGER_HIDDEN_FILES ||
+					substr($entry, 0, 1) !== '.'))
 			{
 				$count++;
 			}
@@ -233,10 +236,8 @@ function getDirectoryListing($share, $path_string)
 		{
 			if ($filename != "." &&
 					$filename != ".." &&
-					(
-						!GD_FILEMANAGER_HIDDEN_FILES ||
-						substr($filename, 0, 1) !== '.'
-					))
+					(!GD_FILEMANAGER_HIDDEN_FILES ||
+					substr($filename, 0, 1) !== '.'))
 			{
 				if (!GD_FILEMANAGER_HIDDEN_FILES || substr($filename, 0, 1) !== '.')
 				{
