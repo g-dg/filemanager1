@@ -135,6 +135,21 @@ function getBasicFileType($share, $path_string)
 	}
 }
 
+// gets the number of items in a directory
+function dirSize($fs_path)
+{
+	$count = 0;
+	if ($handle = opendir($fs_path)) {
+		while (($entry = readdir($handle)) !== false) {
+			if ($entry != "." && $entry != "..") {
+				$count++;
+			}
+		}
+		closedir($handle);
+	}
+	return $count;
+}
+
 // returns the file size or number of files in the folder
 function getFileSize($share, $path_string)
 {
@@ -147,7 +162,7 @@ function getFileSize($share, $path_string)
 			$fs_path = getFsPath($share, $path_string);
 			if (is_readable($fs_path))
 			{
-				return (count(scandir($fs_path)) - 2); // This might be different on Windows
+				return dirSize($fs_path);
 			}
 			return null;
 			break;
