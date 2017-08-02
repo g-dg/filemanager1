@@ -10,7 +10,7 @@ startSession();
 checkUserIP();
 authenticate();
 
-echo getStandardTemplateHeader('About');
+outputStandardTemplateHeader('About');
 
 echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
 ';
@@ -34,4 +34,4 @@ GNU General Public License for more details.</p>
 along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 ';
 
-echo getStandardTemplateFooter();
+outputStandardTemplateFooter();

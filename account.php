@@ -10,7 +10,7 @@ startSession();
 checkUserIP();
 authenticate();
 
-echo getStandardTemplateHeader("My Account");
+outputStandardTemplateHeader("My Account");
 
 $body = '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
 <br />
@@ -60,4 +60,4 @@ if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 
 echo $body;
 
-echo getStandardTemplateFooter();
+outputStandardTemplateFooter();

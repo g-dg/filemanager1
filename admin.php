@@ -166,7 +166,7 @@ function getFullShareList()
 	return $html_listing . '</tbody></table><input type="hidden" name="share_ids" value="'.implode(',', $share_ids).'">'.PHP_EOL;
 }
 
-echo getStandardTemplateHeader('Administration');
+outputStandardTemplateHeader('Administration');
 
 echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'">&lt; Back to main listing</a>
 <br />
@@ -195,4 +195,4 @@ echo '<noscript><div style="font-size: large;"><em>Note: You will not be asked f
 	<br />
 </form>';
 
-echo getStandardTemplateFooter();
+outputStandardTemplateFooter();

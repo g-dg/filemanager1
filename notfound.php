@@ -10,10 +10,10 @@ require_once('template.php');
 function serveNotFoundMessage()
 {
 	http_response_code(404);
-	echo getStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
+	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	echo '<span class="error">Error: Either the file or folder "/' . htmlentities($GLOBALS['requested_full_path']) . '" does not exist, or you don\'t have permission to view it.</span>
 <br />
 <a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>';
-	echo getStandardTemplateFooter();
+	outputStandardTemplateFooter();
 	exit();
 }

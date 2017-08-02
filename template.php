@@ -5,9 +5,9 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
-function getStandardTemplateHeader($title)
+function outputStandardTemplateHeader($title)
 {
-	$header = '<!DOCTYPE html>
+	echo '<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -19,26 +19,25 @@ function getStandardTemplateHeader($title)
 		<div class="header">
 			<div class="tools">
 				<ul>';
-	$header .= '<li>Currently logged in as "'.htmlentities($_SESSION['username']).'"</li>';
+	echo '<li>Currently logged in as "'.htmlentities($_SESSION['username']).'"</li>';
 	if (inGroup('root'))
 	{
-		$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></li>';
+		echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></li>';
 	}
-	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></li>';
-	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/about.php').'">About</a></li>';
-	$header .= '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></li>';
-	$header .= '</ul>
+	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></li>';
+	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/about.php').'">About</a></li>';
+	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></li>';
+	echo '</ul>
 			</div>
 			<div class="title">'.htmlentities($title).' - Garnet DeGelder\'s File Manager on '.htmlentities($_SERVER['HTTP_HOST']).'</div>
 		</div>
 		<div class="content">
 ';
-	return $header;
 }
 
-function getLoginTemplateHeader()
+function outputLoginTemplateHeader()
 {
-	$header = '<!DOCTYPE html>
+	echo '<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -54,7 +53,6 @@ function getLoginTemplateHeader()
 		</div>
 		<div class="content">
 ';
-	return $header;
 }
 
 function getColourExecTime()
@@ -62,40 +60,46 @@ function getColourExecTime()
 	$execTime = microtime(true) - $GLOBALS['script_start_time'];
 	if ($execTime <= 0.125)
 	{
-		return '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+		echo '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
-	if ($execTime <= 0.250)
+	else if ($execTime <= 0.250)
 	{
-		return '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+		echo '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
-	if ($execTime <= 0.500)
+	else if ($execTime <= 0.500)
 	{
-		return '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+		echo '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
-	return '<span style="color:#ff0000;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	else
+	{
+		echo '<span style="color:#ff0000;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
 }
 
-function getColourMemuse()
+function getColourMemUsed()
 {
 	$memUse = round(memory_get_peak_usage() / 1024);
 	if ($memUse <= 1024)
 	{
-		return '<span style="color:#00cc00;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#00cc00;">Max memory usage: ~'.$memUse.' KB.</span>';
 	}
-	if ($memUse <= 2048)
+	else if ($memUse <= 2048)
 	{
-		return '<span style="color:#ffd700;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#ffd700;">Max memory usage: ~'.$memUse.' KB.</span>';
 	}
-	if ($memUse <= 4096)
+	else if ($memUse <= 4096)
 	{
-		return '<span style="color:#ff7f00;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#ff7f00;">Max memory usage: ~'.$memUse.' KB.</span>';
 	}
-	return '<span style="color:#ff0000;">Max memory usage: ~'.$memUse.' KB.</span>';
+	else
+	{
+		echo '<span style="color:#ff0000;">Max memory usage: ~'.$memUse.' KB.</span>';
+	}
 }
 
-function getStandardTemplateFooter()
+function outputStandardTemplateFooter()
 {
-	$footer = '
+	echo '
 		</div>
 		<div class="footer">
 			Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'
@@ -103,19 +107,22 @@ function getStandardTemplateFooter()
 ';
 	if (GD_FILEMANAGER_PROFILER_ENABLE)
 	{
-		$footer .= '			<br />
-			'.getColourExecTime().'
-			'.getColourMemuse().'
+		echo '			<br />
+			';
+		getColourExecTime();
+		echo '
+			';
+		getColourMemUsed();
+		echo '
 ';
 	}
-	$footer .= '		</div>
+	echo '		</div>
 	</body>
 </html>
 ';
-	return $footer;
 }
 
-function getLoginTemplateFooter()
+function outputLoginTemplateFooter()
 {
-	return getStandardTemplateFooter();
+	outputStandardTemplateFooter();
 }

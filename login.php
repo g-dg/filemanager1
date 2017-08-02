@@ -2,7 +2,7 @@
 require_once('init.php');
 require_once('template.php');
 
-echo getLoginTemplateHeader();
+outputLoginTemplateHeader();
 echo '<form action="login_backend.php" method="post" class="standard">
 	<label for="username">Username:</label>
 	<input id="username" type="text" name="username" autocomplete="on" autofocus="autofocus">
@@ -18,4 +18,4 @@ if (defined('GD_FILEMANAGER_MOTD')) {
 
 echo '</form>';
 
-echo getLoginTemplateFooter();
+outputLoginTemplateFooter();

@@ -205,15 +205,11 @@ function getNextSortRequestString($field)
 	return 'sort='.urlencode($field).'&order='.urlencode($newOrder);
 }
 
-function outputListing($body)
-{
-	echo getStandardTemplateHeader('/'.$GLOBALS['requested_full_path']) . $body . getStandardTemplateFooter();
-}
-
 function serveShareListing()
 {
+	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	$shares = sortListingAsRequested(getShareList());
-	$listing = '<table><thead>'.
+	echo '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
 			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
@@ -225,7 +221,7 @@ function serveShareListing()
 	{
 		if (canViewShare($share['name']))
 		{
-			$listing .= '<tr>'.
+			echo '<tr>'.
 					'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</span></td>'.
 					'<td><span title="'.htmlentities($share['name']).'/"><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></span></td>'.
 					'<td><span title="Last modification time not available"><em>N/A</em></span></td>'.
@@ -234,13 +230,14 @@ function serveShareListing()
 					'</tr>';
 		}
 	}
-	$listing .= '</tbody></table>';
-	outputListing($listing);
+	echo '</tbody></table>';
+	outputStandardTemplateFooter();
 }
 
 function serveDirectoryListing($share, $path)
 {
-	$listing = '<table><thead>'.
+	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
+	echo '<table><thead>'.
 			'<tr>'.
 			'<th></th>'.
 			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
@@ -248,7 +245,7 @@ function serveDirectoryListing($share, $path)
 			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
 			'<th><span title="Download">Download</span></th>'.
 			'</tr></thead><tbody>';
-	$listing .= '<tr>'.
+	echo '<tr>'.
 			'<td><span title="Back"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></span></td>'.
 			'<td><span title="Go back up a directory"><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></span></td>'.
 			'<td></td>'.
@@ -268,7 +265,7 @@ function serveDirectoryListing($share, $path)
 					if ($file['basic_type'] === 'file')
 					{
 						// add the session id and open in new tab
-						$listing .= '<tr>'.
+						echo '<tr>'.
 								'<td><span title="File"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></span></td>'.
 								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
@@ -279,7 +276,7 @@ function serveDirectoryListing($share, $path)
 					else if ($file['basic_type'] === 'directory')
 					{
 						// just open in the same tab
-						$listing .= '<tr>'.
+						echo '<tr>'.
 								'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></span></td>'.
 								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
@@ -290,7 +287,7 @@ function serveDirectoryListing($share, $path)
 					else
 					{
 						// the "?"s avoid causing potential errors
-						$listing .= '<tr>'.
+						echo '<tr>'.
 								'<td><span title="Unknown"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
 								'<td><span title="Unknown time last modified">?</span></td>'.
@@ -312,6 +309,6 @@ function serveDirectoryListing($share, $path)
 		require_once('notfound.php');
 		serveNotFoundMessage();
 	}
-	$listing .= '</tbody></table>';
-	outputListing($listing);
+	echo '</tbody></table>';
+	outputStandardTemplateFooter();
 }
