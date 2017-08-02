@@ -5,6 +5,12 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
+function setUpShares()
+{
+	// get the list of shares
+	$GLOBALS['shares'] = dbQuery('select * from "SHARES";');
+}
+
 // used in checking user permissions with the shares
 // if no args, gets currently requested share
 function getShareData($requested_share = null)
@@ -25,11 +31,6 @@ function getShareData($requested_share = null)
 
 function getShareList()
 {
-	if (!isset($GLOBALS['shares']))
-	{
-		// get the list of shares
-		$GLOBALS['shares'] = dbQuery('select * from "SHARES";');
-	}
 	$share_array = array();
 	foreach ($GLOBALS['shares'] as $share)
 	{

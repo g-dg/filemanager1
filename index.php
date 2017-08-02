@@ -15,6 +15,7 @@ startSession();
 checkUserIP();
 authenticate();
 setUpPaths();
+setUpShares();
 
 // pass off to the router which passes off to the appropriate server.
 // note that currently the session ends here to avoid session lock when serving files.
