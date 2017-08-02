@@ -40,8 +40,7 @@ function authenticate()
 		}
 		
 		// we don't want any accidental access to even a hashed password, as there is no salt or anything
-		// EDIT: this only causes more errors.
-		//unset($_SESSION['password_hashed']);
+		unset($_SESSION['password_hashed']);
 
 		if (is_null($_SESSION['user_id']))
 		{
