@@ -140,9 +140,12 @@ function getBasicFileType($share, $path_string)
 function dirSize($fs_path)
 {
 	$count = 0;
-	if ($handle = opendir($fs_path)) {
-		while (($entry = readdir($handle)) !== false) {
-			if ($entry != "." && $entry != "..") {
+	if ($handle = opendir($fs_path))
+	{
+		while (($entry = readdir($handle)) !== false)
+		{
+			if ($entry != "." && $entry != "..")
+			{
 				$count++;
 			}
 		}
@@ -224,14 +227,25 @@ function getDirectoryListing($share, $path_string)
 	}
 
 	$listing = array();
-	if ($handle = opendir($fs_path)) {
-		while (($filename = readdir($handle)) !== false) {
-			if ($filename != "." && $filename != "..") {
-				$listing[] = array('name' => $filename,
-						'uri' => getHttpUri($share . '/' . $path_string . '/' . $filename), //TODO: fix '//'s in the root of the shares (not critical, as it gets handled by the sanitizer)
-						'basic_type' => getBasicFileType($share, $path_string . '/' . $filename),
-						'size' => getFileSize($share, $path_string . '/' . $filename),
-						'last_modified' => getFileModificationTime($share, $path_string . '/' . $filename));
+	if ($handle = opendir($fs_path))
+	{
+		while (($filename = readdir($handle)) !== false)
+		{
+			if ($filename != "." &&
+					$filename != ".." &&
+					(
+						!GD_FILEMANAGER_HIDDEN_FILES ||
+						substr($filename, 0, 1) !== '.'
+					))
+			{
+				if (!GD_FILEMANAGER_HIDDEN_FILES || substr($filename, 0, 1) !== '.')
+				{
+					$listing[] = array('name' => $filename,
+							'uri' => getHttpUri($share . '/' . $path_string . '/' . $filename), //TODO: fix '//'s in the root of the shares (not critical, as it gets handled by the sanitizer)
+							'basic_type' => getBasicFileType($share, $path_string . '/' . $filename),
+							'size' => getFileSize($share, $path_string . '/' . $filename),
+							'last_modified' => getFileModificationTime($share, $path_string . '/' . $filename));
+				}
 			}
 		}
 		closedir($handle);
