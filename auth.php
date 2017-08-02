@@ -51,9 +51,6 @@ function authenticate()
 			exit();
 		}
 		
-		// get the list of shares (we don't want to do database querys if we can help it)
-		$_SESSION['shares'] = dbQuery('select * from "SHARES";');
-		
 		// return that the authentication was successful
 		return true;
 	}

@@ -13,7 +13,7 @@ function getShareData($requested_share = null)
 	{
 		$requested_share = $GLOBALS['requested_share'];
 	}
-	foreach ($_SESSION['shares'] as $share)
+	foreach ($GLOBALS['shares'] as $share)
 	{
 		if ($requested_share === $share['NAME'])
 		{
@@ -25,8 +25,13 @@ function getShareData($requested_share = null)
 
 function getShareList()
 {
+	if (!isset($GLOBALS['shares']))
+	{
+		// get the list of shares
+		$GLOBALS['shares'] = dbQuery('select * from "SHARES";');
+	}
 	$share_array = array();
-	foreach ($_SESSION['shares'] as $share)
+	foreach ($GLOBALS['shares'] as $share)
 	{
 		$share_array[] = array('name' => $share['NAME'],
 				'uri' => getHttpUri($share['NAME']),
@@ -102,7 +107,7 @@ function canEditShare($share)
 function getNumberOfVisibleShares()
 {
 	$visible_share_count = 0;
-	foreach ($_SESSION['shares'] as $share)
+	foreach ($GLOBALS['shares'] as $share)
 	{
 		if (canViewShare($share['NAME']))
 		{
@@ -115,7 +120,7 @@ function getNumberOfVisibleShares()
 function getNumberOfReadableShares()
 {
 	$visible_share_count = 0;
-	foreach ($_SESSION['shares'] as $share)
+	foreach ($GLOBALS['shares'] as $share)
 	{
 		if (canReadShare($share['NAME']))
 		{
@@ -128,7 +133,7 @@ function getNumberOfReadableShares()
 function getNumberOfEditableShares()
 {
 	$visible_share_count = 0;
-	foreach ($_SESSION['shares'] as $share)
+	foreach ($GLOBALS['shares'] as $share)
 	{
 		if (canEditShare($share['NAME']))
 		{
