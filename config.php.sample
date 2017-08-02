@@ -8,3 +8,4 @@ define('GD_FILEMANAGER_DATABASE_FILE', 'php_filemanager.sqlite3');
 define('GD_FILEMANAGER_MOTD', '<em>To log in as guest, enter "guest" as the username and leave the password blank.</em>');
 define('GD_FILEMANAGER_GUEST_USER', 'guest');
 define('GD_FILEMANAGER_PROFILER_ENABLE', true);
+define('GD_FILEMANAGER_HIDDEN_FILES', true);

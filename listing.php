@@ -224,38 +224,41 @@ function serveDirectoryListing($share, $path)
 		{
 			foreach ($dir_list as $file)
 			{
-				if ($file['basic_type'] === 'file')
+				if (!GD_FILEMANAGER_HIDDEN_FILES || substr($file['name'], 0, 1) !== '.')
 				{
-					// add the session id and open in new tab
-					$listing .= '<tr>'.
-							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></td>'.
-							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
-							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
-							'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
-							'</tr>';
-				}
-				else if ($file['basic_type'] === 'directory')
-				{
-					// just open in the same tab
-					$listing .= '<tr>'.
-							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></td>'.
-							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
-							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-							'<td>'.htmlentities(prettifyFileCount($file['size'])).'</td>'.
-							'<td></td>'.
-							'</tr>';
-				}
-				else
-				{
-					// the "?"s avoid causing potential errors
-					$listing .= '<tr>'.
-							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></td>'.
-							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></td>'.
-							'<td>?</td>'.
-							'<td>?</td>'.
-							'<td></td>'.
-							'</tr>';
+					if ($file['basic_type'] === 'file')
+					{
+						// add the session id and open in new tab
+						$listing .= '<tr>'.
+								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></td>'.
+								'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></td>'.
+								'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
+								'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
+								'<td><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></td>'.
+								'</tr>';
+					}
+					else if ($file['basic_type'] === 'directory')
+					{
+						// just open in the same tab
+						$listing .= '<tr>'.
+								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></td>'.
+								'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
+								'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
+								'<td>'.htmlentities(prettifyFileCount($file['size'])).'</td>'.
+								'<td></td>'.
+								'</tr>';
+					}
+					else
+					{
+						// the "?"s avoid causing potential errors
+						$listing .= '<tr>'.
+								'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.gif" alt="[ ? ]" width="20" height="22"></td>'.
+								'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></td>'.
+								'<td>?</td>'.
+								'<td>?</td>'.
+								'<td></td>'.
+								'</tr>';
+					}
 				}
 			}
 		}
