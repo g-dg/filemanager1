@@ -142,9 +142,42 @@ function prettifyFileCount($count)
 	return sprintf("%01.1fM", ($count / (10**6)));
 }
 
+// just adds an "s"
+function pluralize($number, $string)
+{
+	if ($number == 1)
+	{
+		return $number . ' ' . $string;
+	}
+	return $number . ' ' . $string . 's';
+}
+// gives human-readable date (eg. 5 hours ago)
 function prettifyDate($date)
 {
-	return date(GD_FILEMANAGER_DATE_FORMAT, $date);
+	//return date(GD_FILEMANAGER_DATE_FORMAT, $date);
+
+	$dateDiff = time() - $date;
+	if ($dateDiff >= 31557600) // 1 year
+	{
+		return pluralize(ceil($dateDiff / 31557600), 'year'). ' ago';
+	}
+	if ($dateDiff >= 2635200) // 1 month
+	{
+		return pluralize(ceil($dateDiff / 2635200), 'month'). ' ago';
+	}
+	if ($dateDiff >= 86400) // 1 day
+	{
+		return pluralize(ceil($dateDiff / 86400), 'day'). ' ago';
+	}
+	if ($dateDiff >= 3600) // 1 hour
+	{
+		return pluralize(ceil($dateDiff / 3600), 'hour'). ' ago';
+	}
+	if ($dateDiff >= 60) // 1 minute
+	{
+		return pluralize(ceil($dateDiff / 60), 'minute'). ' ago';
+	}
+	return pluralize(ceil($dateDiff), 'second'). ' ago';
 }
 
 function getNextSortRequestString($field)
