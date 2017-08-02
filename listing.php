@@ -129,6 +129,23 @@ function prettifyFileSize($size)
 	return sprintf("%01.1fG", ($size / (2**30)));
 }
 
+function prettifyFileCount($count)
+{
+	if ($count < (10**3))
+	{
+		return $count;
+	}
+	if ($count < (10**6))
+	{
+		return sprintf("%01.1fK", ($count / (10**3)));
+	}
+	if ($count < (10**9))
+	{
+		return sprintf("%01.1fM", ($count / (10**6)));
+	}
+	return sprintf("%01.1fG", ($count / (10**9)));
+}
+
 function getNextSortRequestString($field)
 {
 	$currentOrder = 'asc';
@@ -175,7 +192,7 @@ function serveShareListing()
 					'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</td>'.
 					'<td><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></td>'.
 					'<td><em>N/A</em></td>'.
-					'<td>'.htmlentities(prettifyFileSize(getFileSize($share['name'], ''))).'</td>'.
+					'<td>'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</td>'.
 					'<td><em>N/A</em></td>'.
 					'</tr>';
 		}
@@ -229,7 +246,7 @@ function serveDirectoryListing($share, $path)
 							'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></td>'.
 							'<td><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></td>'.
 							'<td>'.htmlentities(date($date_format, $file['last_modified'])).'</td>'.
-							'<td>'.htmlentities(prettifyFileSize($file['size'])).'</td>'.
+							'<td>'.htmlentities(prettifyFileCount($file['size'])).'</td>'.
 							'<td></td>'.
 							'</tr>';
 				}
