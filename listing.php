@@ -149,7 +149,10 @@ function pluralize($number, $string)
 	{
 		return $number . ' ' . $string;
 	}
-	return $number . ' ' . $string . 's';
+	else
+	{
+		return $number . ' ' . $string . 's';
+	}
 }
 // gives human-readable date (eg. 5 hours ago)
 function prettifyDate($date)
@@ -226,7 +229,7 @@ function serveShareListing()
 					'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]"</span></td>'.
 					'<td><span title="'.htmlentities($share['name']).'/"><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></span></td>'.
 					'<td><span title="Last modification time not available"><em>N/A</em></span></td>'.
-					'<td><span title="Contains '.htmlentities(getFileSize($share['name'], '')).' files">'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</span></td>'.
+					'<td><span title="Contains '.htmlentities(pluralize(getFileSize($share['name'], '')), 'file').'">'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</span></td>'.
 					'<td><span title="Download not available"><em>N/A</em></span></td>'.
 					'</tr>';
 		}
@@ -269,7 +272,7 @@ function serveDirectoryListing($share, $path)
 								'<td><span title="File"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/generic.gif" alt="[FILE]" width="20" height="22"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'" target="_blank">'.htmlentities($file['name']).'</a></span></td>'.
 								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
-								'<td><span title="'.htmlentities($file['size']).' bytes">'.htmlentities(prettifyFileSize($file['size'])).'</span></td>'.
+								'<td><span title="'.htmlentities(number_format($file['size'], 0, '.', ',')).' bytes">'.htmlentities(prettifyFileSize($file['size'])).'</span></td>'.
 								'<td><span title="Download '.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'?'.urlencode(session_name()).'='.urlencode(session_id()).'&amp;download">Download</a></span></td>'.
 								'</tr>';
 					}
@@ -280,7 +283,7 @@ function serveDirectoryListing($share, $path)
 								'<td><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></span></td>'.
 								'<td><span title="'.htmlentities(prettifyDate($file['last_modified'])).'">'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'</span></td>'.
-								'<td><span title="Contains '.htmlentities($file['size']).' files">'.htmlentities(prettifyFileCount($file['size'])).'</span></td>'.
+								'<td><span title="Contains '.htmlentities(pluralize(number_format($file['size'], 0, '.', ','), 'file')).'">'.htmlentities(prettifyFileCount($file['size'])).'</span></td>'.
 								'<td><span title="Download not available"><em>N/A</em></span></td>'.
 								'</tr>';
 					}
