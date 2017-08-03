@@ -57,22 +57,22 @@ function outputLoginTemplateHeader()
 
 function getColourMemUsed()
 {
-	$memUse = number_format(round(memory_get_peak_usage() / 1024), 0, '.', ',');
+	$memUse = round(memory_get_peak_usage() / 1024);
 	if ($memUse <= 1024)
 	{
-		echo '<span style="color:#00cc00;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#00cc00;">Max memory usage: ~'.number_format($memUse, 0, '.', ',').' KB.</span>';
 	}
 	else if ($memUse <= 2048)
 	{
-		echo '<span style="color:#ffd700;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#ffd700;">Max memory usage: ~'.number_format($memUse, 0, '.', ',').' KB.</span>';
 	}
 	else if ($memUse <= 4096)
 	{
-		echo '<span style="color:#ff7f00;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#ff7f00;">Max memory usage: ~'.number_format($memUse, 0, '.', ',').' KB.</span>';
 	}
 	else
 	{
-		echo '<span style="color:#ff0000;">Max memory usage: ~'.$memUse.' KB.</span>';
+		echo '<span style="color:#ff0000;">Max memory usage: ~'.number_format($memUse, 0, '.', ',').' KB.</span>';
 	}
 }
 
