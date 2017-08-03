@@ -42,7 +42,7 @@ function getCachedOrGenerateMimeTypeArray()
 		generateMimeTypeArray();
 		if (is_writable('./'))
 		{
-			file_put_contents('mime_types.json', json_encode($GLOBALS['mimetypes'], JSON_FORCE_OBJECT));
+			file_put_contents('mime_types.json', json_encode($GLOBALS['mimetypes']));
 		}
 	}
 }
