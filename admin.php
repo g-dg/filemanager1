@@ -24,10 +24,10 @@ $GLOBALS['all_shares'] = dbQuery('SELECT "ID", "NAME", "PATH", "GROUPS_VISIBLE",
 usort($GLOBALS['all_users'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
 usort($GLOBALS['all_shares'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
 
-function getUserList()
+function outputUserList()
 {
 	$user_ids = array();
-	$html_listing = '<table><thead><tr>'.
+	echo '<table><thead><tr>'.
 			'<th>Username</th>'.
 			'<th>Change Username</th>'.
 			'<th>&nbsp;</th>'.
@@ -44,7 +44,7 @@ function getUserList()
 	foreach ($GLOBALS['all_users'] as $user)
 	{
 		$user_ids[] = $user['ID'];
-		$html_listing .= '<tr>'.
+		echo '<tr>'.
 				'<td><input type="text" name="user_name_'.htmlentities($user['ID']).'" value="'.htmlentities($user['NAME']).'"></td>'.
 				'<td><input type="submit" name="change_user_name_'.htmlentities($user['ID']).'" value="Change Username" onclick="return confirm(\'Proceed with username change?\');"></td>'.
 				'<td>&nbsp;</td>'.
@@ -59,7 +59,7 @@ function getUserList()
 				'<td><input type="submit" name="login_as_user_'.htmlentities($user['ID']).'" value="Log in as &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with log in?\');"></td>'.
 				'</tr>';
 	}
-	$html_listing .= '<tr>'.
+	echo '<tr>'.
 			'<td colspan="12">'.
 			'<hr />'.
 			'</td>'.
@@ -92,13 +92,13 @@ function getUserList()
 			'<td><input type="submit" name="create_user" value="Create User" onclick="return confirm(\'Proceed with user creation?\');"></td>'.
 			'<td></td>'.
 			'</tr>';
-	return $html_listing . '</tbody></table><input type="hidden" name="user_ids" value="'.implode(',', $user_ids).'">'.PHP_EOL;
+	echo '</tbody></table><input type="hidden" name="user_ids" value="'.implode(',', $user_ids).'">'.PHP_EOL;
 }
 
-function getFullShareList()
+function outputFullShareList()
 {
 	$share_ids = array();
-	$html_listing = '<table><thead><tr>'.
+	echo '<table><thead><tr>'.
 			'<th>Name</th>'.
 			'<th>Change Name</th>'.
 			'<th>&nbsp;</th>'.
@@ -115,7 +115,7 @@ function getFullShareList()
 	foreach ($GLOBALS['all_shares'] as $share)
 	{
 		$share_ids[] = $share['ID'];
-		$html_listing .= '<tr>'.
+		echo '<tr>'.
 				'<td><input type="text" name="share_name_'.htmlentities($share['ID']).'" value="'.htmlentities($share['NAME']).'"></td>'.
 				'<td><input type="submit" name="change_share_name_'.htmlentities($share['ID']).'" value="Change Name" onclick="return confirm(\'Proceed with share name change?\');"></td>'.
 				'<td>&nbsp;</td>'.
@@ -130,7 +130,7 @@ function getFullShareList()
 				'<td><input type="submit" name="delete_share_'.htmlentities($share['ID']).'" value="Delete &quot;'.htmlentities($share['NAME']).'&quot;" onclick="return confirm(\'Proceed with share deletion?\');"></td>'.
 				'</tr>';
 	}
-	$html_listing .= '<tr>'.
+	echo '<tr>'.
 			'<td colspan="12">'.
 			'<hr />'.
 			'</td>'.
@@ -163,7 +163,7 @@ function getFullShareList()
 			'<td>&nbsp;</td>'.
 			'<td><input type="submit" name="create_share" value="Create Share" onclick="return confirm(\'Proceed with share creation?\');"></td>'.
 			'</tr>';
-	return $html_listing . '</tbody></table><input type="hidden" name="share_ids" value="'.implode(',', $share_ids).'">'.PHP_EOL;
+	echo '</tbody></table><input type="hidden" name="share_ids" value="'.implode(',', $share_ids).'">'.PHP_EOL;
 }
 
 outputStandardTemplateHeader('Administration');
@@ -182,14 +182,18 @@ echo '<noscript><div style="font-size: large;"><em>Note: You will not be asked f
 	<div style="overflow: auto;">
 		<fieldset>
 			<legend>Users</legend>
-			'.getUserList().'
+			';
+outputUserList();
+echo '
 		</fieldset>
 	</div>
 	<br />
 	<div style="overflow: auto;">
 		<fieldset>
 			<legend>Shares</legend>
-			'.getFullShareList().'
+			';
+outputFullShareList();
+echo '
 		</fieldset>
 	</div>
 	<br />

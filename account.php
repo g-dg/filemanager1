@@ -12,17 +12,17 @@ authenticate();
 
 outputStandardTemplateHeader("My Account");
 
-$body = '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
+echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
 <br />
 <br />
 ';
 if (isset($_GET['msg']))
 {
-	$body .= '<div style="font-size: large;">'.htmlentities($_GET['msg']).'</div>
+	echo '<div style="font-size: large;">'.htmlentities($_GET['msg']).'</div>
 <br />
 ';
 }
-$body .= '<form action="account_backend.php" method="post" class="standard">
+echo '<form action="account_backend.php" method="post" class="standard">
 	<fieldset>
 		<legend>Username</legend>
 		<code>
@@ -33,7 +33,7 @@ $body .= '<form action="account_backend.php" method="post" class="standard">
 ';
 if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 {
-	$body .='	<fieldset>
+	echo '	<fieldset>
 		<legend>Password</legend>
 		<label>
 			Current Password:
@@ -50,14 +50,12 @@ if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 		<input type="submit" name="submit" value="Change Password" style="width: 100%;">
 	</fieldset>';
 }
-	$body .= '	<fieldset>
+	echo '	<fieldset>
 		<legend>Groups</legend>
 		<code>
 			'.htmlentities(implode(', ', $_SESSION['groups'])).'
 		</code>
 	</fieldset>
 </form>';
-
-echo $body;
 
 outputStandardTemplateFooter();
