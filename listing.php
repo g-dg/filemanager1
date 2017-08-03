@@ -201,27 +201,27 @@ function serveDirectoryListing($share, $path)
 {
 	$date_format = 'Y-m-d h:i';
 
-	$listing = '<table><thead>'.
-			'<tr>'.
-			'<th></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
-			'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
-			'<th>Download</th>'.
-			'</tr></thead><tbody>';
-	$listing .= '<tr>'.
-			'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></td>'.
-			'<td><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></td>'.
-			'<td></td>'.
-			'<td></td>'.
-			'<td></td>'.
-			'</tr>';
 	// check if the share is readable (note: not necessarily visible)
 	if (canReadShare($share))
 	{
 		$dir_list = sortListingAsRequested(getDirectoryListing($share, $path));
 		if ($dir_list !== false)
 		{
+			$listing = '<table><thead>'.
+					'<tr>'.
+					'<th></th>'.
+					'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></th>'.
+					'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></th>'.
+					'<th><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></th>'.
+					'<th>Download</th>'.
+					'</tr></thead><tbody>';
+			$listing .= '<tr>'.
+					'<td><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></td>'.
+					'<td><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'</tr>';
 			foreach ($dir_list as $file)
 			{
 				if (!GD_FILEMANAGER_HIDDEN_FILES || substr($file['name'], 0, 1) !== '.')
@@ -261,6 +261,8 @@ function serveDirectoryListing($share, $path)
 					}
 				}
 			}
+			$listing .= '</tbody></table>';
+			outputListing($listing);
 		}
 		else
 		{
@@ -273,6 +275,4 @@ function serveDirectoryListing($share, $path)
 		require_once('notfound.php');
 		serveNotFoundMessage();
 	}
-	$listing .= '</tbody></table>';
-	outputListing($listing);
 }
