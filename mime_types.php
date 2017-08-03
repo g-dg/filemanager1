@@ -26,11 +26,13 @@ function generateMimeTypeArray()
 	return $GLOBALS['mimetypes'];
 }
 
-generateMimeTypeArray();
-
 // returns false if no extension
 function getMimeTypeFromExtension($filename)
 {
+	if (!isset($GLOBALS['mimetypes']))
+	{
+		generateMimeTypeArray();
+	}
 	$extension = pathinfo(basename($filename))['extension'];
 	foreach($GLOBALS['mimetypes'] as $mimetypedef)
 	{
