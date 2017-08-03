@@ -79,15 +79,15 @@ function getColourMemUsed()
 function getColourExecTime()
 {
 	$execTime = microtime(true) - $GLOBALS['script_start_time'];
-	if ($execTime <= 0.125)
+	if ($execTime <= 0.250)
 	{
 		echo '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
-	else if ($execTime <= 0.250)
+	else if ($execTime <= 0.500)
 	{
 		echo '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
-	else if ($execTime <= 0.500)
+	else if ($execTime <= 1.000)
 	{
 		echo '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
 	}
