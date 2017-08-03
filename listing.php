@@ -236,28 +236,28 @@ function serveShareListing()
 
 function serveDirectoryListing($share, $path)
 {
-	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
-	echo '<table><thead>'.
-			'<tr>'.
-			'<th></th>'.
-			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
-			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
-			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
-			'<th><span title="Download">Download</span></th>'.
-			'</tr></thead><tbody>';
-	echo '<tr>'.
-			'<td><span title="Back"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></span></td>'.
-			'<td><span title="Go back up a directory"><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></span></td>'.
-			'<td></td>'.
-			'<td></td>'.
-			'<td></td>'.
-			'</tr>';
 	// check if the share is readable (note: not necessarily visible)
 	if (canReadShare($share))
 	{
 		$dir_list = sortListingAsRequested(getDirectoryListing($share, $path));
 		if ($dir_list !== false)
 		{
+			outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
+			echo '<table><thead>'.
+					'<tr>'.
+					'<th></th>'.
+					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
+					'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
+					'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
+					'<th><span title="Download">Download</span></th>'.
+					'</tr></thead><tbody>';
+			echo '<tr>'.
+					'<td><span title="Back"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></span></td>'.
+					'<td><span title="Go back up a directory"><a href="'.getParentHttpUri(shareStringAndPathStringToFullPathString($share, $path)).'">[Parent Directory]</a></span></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'</tr>';
 			foreach ($dir_list as $file)
 			{
 				if (!GD_FILEMANAGER_HIDDEN_FILES || substr($file['name'], 0, 1) !== '.')
@@ -297,6 +297,8 @@ function serveDirectoryListing($share, $path)
 					}
 				}
 			}
+			echo '</tbody></table>';
+			outputStandardTemplateFooter();
 		}
 		else
 		{
@@ -309,6 +311,4 @@ function serveDirectoryListing($share, $path)
 		require_once('notfound.php');
 		serveNotFoundMessage();
 	}
-	echo '</tbody></table>';
-	outputStandardTemplateFooter();
 }
