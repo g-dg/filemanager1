@@ -55,27 +55,6 @@ function outputLoginTemplateHeader()
 ';
 }
 
-function getColourExecTime()
-{
-	$execTime = microtime(true) - $GLOBALS['script_start_time'];
-	if ($execTime <= 0.125)
-	{
-		echo '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
-	}
-	else if ($execTime <= 0.250)
-	{
-		echo '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
-	}
-	else if ($execTime <= 0.500)
-	{
-		echo '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
-	}
-	else
-	{
-		echo '<span style="color:#ff0000;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
-	}
-}
-
 function getColourMemUsed()
 {
 	$memUse = number_format(round(memory_get_peak_usage() / 1024), 0, '.', ',');
@@ -97,6 +76,27 @@ function getColourMemUsed()
 	}
 }
 
+function getColourExecTime()
+{
+	$execTime = microtime(true) - $GLOBALS['script_start_time'];
+	if ($execTime <= 0.125)
+	{
+		echo '<span style="color:#00cc00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	else if ($execTime <= 0.250)
+	{
+		echo '<span style="color:#ffd700;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	else if ($execTime <= 0.500)
+	{
+		echo '<span style="color:#ff7f00;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+	else
+	{
+		echo '<span style="color:#ff0000;">Page generated in ~'.sprintf("%.4f", $execTime).' seconds.</span>';
+	}
+}
+
 function outputStandardTemplateFooter()
 {
 	echo '
@@ -109,10 +109,10 @@ function outputStandardTemplateFooter()
 	{
 		echo '			<br />
 			';
-		getColourExecTime();
+		getColourMemUsed();
 		echo '
 			';
-		getColourMemUsed();
+		getColourExecTime();
 		echo '
 ';
 	}
