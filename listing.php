@@ -209,7 +209,7 @@ function serveShareListing()
 {
 	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	$shares = sortListingAsRequested(getShareList());
-	echo '<table><thead>'.
+	echo '<table class="listing"><thead>'.
 			'<tr>'.
 			'<th></th>'.
 			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
@@ -243,7 +243,7 @@ function serveDirectoryListing($share, $path)
 		if ($dir_list !== false)
 		{
 			outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
-			echo '<table><thead>'.
+			echo '<table class="listing"><thead>'.
 					'<tr>'.
 					'<th></th>'.
 					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
