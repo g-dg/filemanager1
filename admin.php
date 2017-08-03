@@ -45,18 +45,18 @@ function getUserList()
 	{
 		$user_ids[] = $user['ID'];
 		$html_listing .= '<tr>'.
-				'<td><input type="text" name="user_name_'.$user['ID'].'" value="'.htmlentities($user['NAME']).'"></td>'.
-				'<td><input type="submit" name="change_user_name_'.$user['ID'].'" value="Change Username" onclick="return confirm(\'Proceed with username change?\');"></td>'.
+				'<td><input type="text" name="user_name_'.htmlentities($user['ID']).'" value="'.htmlentities($user['NAME']).'"></td>'.
+				'<td><input type="submit" name="change_user_name_'.htmlentities($user['ID']).'" value="Change Username" onclick="return confirm(\'Proceed with username change?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="password" name="user_password1_'.$user['ID'].'" value=""></td>'.
-				'<td><input type="password" name="user_password2_'.$user['ID'].'" value=""></td>'.
-				'<td><input type="submit" name="change_user_password_'.$user['ID'].'" value="Change Password" onclick="return confirm(\'Proceed with user password change?\');"></td>'.
+				'<td><input type="password" name="user_password1_'.htmlentities($user['ID']).'" value=""></td>'.
+				'<td><input type="password" name="user_password2_'.htmlentities($user['ID']).'" value=""></td>'.
+				'<td><input type="submit" name="change_user_password_'.htmlentities($user['ID']).'" value="Change Password" onclick="return confirm(\'Proceed with user password change?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="text" name="user_groups_'.$user['ID'].'" value="'.htmlentities($user['GROUPS']).'" size="40"></td>'.
-				'<td><input type="submit" name="change_user_groups_'.$user['ID'].'" value="Update Groups" onclick="return confirm(\'Proceed with user group update?\');"></td>'.
+				'<td><input type="text" name="user_groups_'.htmlentities($user['ID']).'" value="'.htmlentities($user['GROUPS']).'" size="40"></td>'.
+				'<td><input type="submit" name="change_user_groups_'.htmlentities($user['ID']).'" value="Update Groups" onclick="return confirm(\'Proceed with user group update?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="submit" name="delete_user_'.$user['ID'].'" value="Delete &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with user deletion?\');"></td>'.
-				'<td><input type="submit" name="login_as_user_'.$user['ID'].'" value="Log in as &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with log in?\');"></td>'.
+				'<td><input type="submit" name="delete_user_'.htmlentities($user['ID']).'" value="Delete &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with user deletion?\');"></td>'.
+				'<td><input type="submit" name="login_as_user_'.htmlentities($user['ID']).'" value="Log in as &quot;'.htmlentities($user['NAME']).'&quot;" onclick="return confirm(\'Proceed with log in?\');"></td>'.
 				'</tr>';
 	}
 	$html_listing .= '<tr>'.
@@ -116,18 +116,18 @@ function getFullShareList()
 	{
 		$share_ids[] = $share['ID'];
 		$html_listing .= '<tr>'.
-				'<td><input type="text" name="share_name_'.$share['ID'].'" value="'.htmlentities($share['NAME']).'"></td>'.
-				'<td><input type="submit" name="change_share_name_'.$share['ID'].'" value="Change Name" onclick="return confirm(\'Proceed with share name change?\');"></td>'.
+				'<td><input type="text" name="share_name_'.htmlentities($share['ID']).'" value="'.htmlentities($share['NAME']).'"></td>'.
+				'<td><input type="submit" name="change_share_name_'.htmlentities($share['ID']).'" value="Change Name" onclick="return confirm(\'Proceed with share name change?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="text" name="share_path_'.$share['ID'].'" value="'.htmlentities($share['PATH']).'"></td>'.
-				'<td><input type="submit" name="change_share_path_'.$share['ID'].'" value="Change Path" onclick="return confirm(\'Proceed with share path change?\');"></td>'.
+				'<td><input type="text" name="share_path_'.htmlentities($share['ID']).'" value="'.htmlentities($share['PATH']).'"></td>'.
+				'<td><input type="submit" name="change_share_path_'.htmlentities($share['ID']).'" value="Change Path" onclick="return confirm(\'Proceed with share path change?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="text" name="share_groups_visible_'.$share['ID'].'" value="'.htmlentities($share['GROUPS_VISIBLE']).'" size="40"></td>'.
-				'<td><input type="text" name="share_groups_access_'.$share['ID'].'" value="'.htmlentities($share['GROUPS_ACCESS_FILES']).'" size="40"></td>'.
-				'<td><input type="text" name="share_groups_modify_'.$share['ID'].'" value="'.htmlentities($share['GROUPS_MODIFY_FILES']).'" size="40"></td>'.
-				'<td><input type="submit" name="change_share_groups_'.$share['ID'].'" value="Update Groups" onclick="return confirm(\'Proceed with share group update?\');"></td>'.
+				'<td><input type="text" name="share_groups_visible_'.htmlentities($share['ID']).'" value="'.htmlentities($share['GROUPS_VISIBLE']).'" size="40"></td>'.
+				'<td><input type="text" name="share_groups_access_'.htmlentities($share['ID']).'" value="'.htmlentities($share['GROUPS_ACCESS_FILES']).'" size="40"></td>'.
+				'<td><input type="text" name="share_groups_modify_'.htmlentities($share['ID']).'" value="'.htmlentities($share['GROUPS_MODIFY_FILES']).'" size="40"></td>'.
+				'<td><input type="submit" name="change_share_groups_'.htmlentities($share['ID']).'" value="Update Groups" onclick="return confirm(\'Proceed with share group update?\');"></td>'.
 				'<td>&nbsp;</td>'.
-				'<td><input type="submit" name="delete_share_'.$share['ID'].'" value="Delete &quot;'.htmlentities($share['NAME']).'&quot;" onclick="return confirm(\'Proceed with share deletion?\');"></td>'.
+				'<td><input type="submit" name="delete_share_'.htmlentities($share['ID']).'" value="Delete &quot;'.htmlentities($share['NAME']).'&quot;" onclick="return confirm(\'Proceed with share deletion?\');"></td>'.
 				'</tr>';
 	}
 	$html_listing .= '<tr>'.

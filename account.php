@@ -28,7 +28,7 @@ $body .= '<form action="account_backend.php" method="post" class="standard">
 		<code>
 			'.htmlentities($_SESSION['username']).'
 		</code>
-		<!-- (User ID: '.$_SESSION['user_id'].') -->
+		<!-- (User ID: '.htmlentities($_SESSION['user_id']).') -->
 	</fieldset>
 ';
 if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
