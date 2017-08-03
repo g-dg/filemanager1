@@ -78,7 +78,7 @@ function getColourExecTime()
 
 function getColourMemUsed()
 {
-	$memUse = round(memory_get_peak_usage() / 1024);
+	$memUse = number_format(round(memory_get_peak_usage() / 1024), 0, '.', ',');
 	if ($memUse <= 1024)
 	{
 		echo '<span style="color:#00cc00;">Max memory usage: ~'.$memUse.' KB.</span>';
