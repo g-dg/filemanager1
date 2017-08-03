@@ -282,9 +282,6 @@ function processAdminInput()
 
 if (processAdminInput() === true)
 {
-	// reload shares
-	$GLOBALS['shares'] = dbQuery('select * from "SHARES";');
-	
 	header('Location: admin.php?msg='.urlencode('The last action completed successfully.'));
 	exit();
 }
