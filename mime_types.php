@@ -47,7 +47,7 @@ function getCachedOrGenerateMimeTypeArray()
 	}
 }
 
-// returns false if no extension
+// returns null if no extension
 function getMimeTypeFromExtension($filename)
 {
 	if (!isset($GLOBALS['mimetypes']))
