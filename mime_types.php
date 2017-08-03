@@ -26,12 +26,33 @@ function generateMimeTypeArray()
 	return $GLOBALS['mimetypes'];
 }
 
+function getCachedOrGenerateMimeTypeArray()
+{
+	if (is_readable('mime_types.json'))
+	{
+		// set array to cached version
+		$GLOBALS['mimetypes'] = json_decode(file_get_contents('mime_types.json'), true);
+		if (json_last_error() !== JSON_ERROR_NONE)
+		{
+			generateMimeTypeArray();
+		}
+	}
+	else
+	{
+		generateMimeTypeArray();
+		if (is_writable('./'))
+		{
+			file_put_contents('mime_types.json', json_encode($GLOBALS['mimetypes'], JSON_FORCE_OBJECT));
+		}
+	}
+}
+
 // returns false if no extension
 function getMimeTypeFromExtension($filename)
 {
 	if (!isset($GLOBALS['mimetypes']))
 	{
-		generateMimeTypeArray();
+		getCachedOrGenerateMimeTypeArray();
 	}
 	$extension = pathinfo(basename($filename))['extension'];
 	foreach($GLOBALS['mimetypes'] as $mimetypedef)
