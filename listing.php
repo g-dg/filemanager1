@@ -162,25 +162,25 @@ function prettifyDate($date)
 	$dateDiff = time() - $date;
 	if ($dateDiff >= 31557600) // 1 year
 	{
-		return pluralize(ceil($dateDiff / 31557600), 'year'). ' ago';
+		return pluralize(round($dateDiff / 31557600), 'year'). ' ago';
 	}
 	if ($dateDiff >= 2635200) // 1 month
 	{
-		return pluralize(ceil($dateDiff / 2635200), 'month'). ' ago';
+		return pluralize(round($dateDiff / 2635200), 'month'). ' ago';
 	}
 	if ($dateDiff >= 86400) // 1 day
 	{
-		return pluralize(ceil($dateDiff / 86400), 'day'). ' ago';
+		return pluralize(round($dateDiff / 86400), 'day'). ' ago';
 	}
 	if ($dateDiff >= 3600) // 1 hour
 	{
-		return pluralize(ceil($dateDiff / 3600), 'hour'). ' ago';
+		return pluralize(round($dateDiff / 3600), 'hour'). ' ago';
 	}
 	if ($dateDiff >= 60) // 1 minute
 	{
-		return pluralize(ceil($dateDiff / 60), 'minute'). ' ago';
+		return pluralize(round($dateDiff / 60), 'minute'). ' ago';
 	}
-	return pluralize(ceil($dateDiff), 'second'). ' ago';
+	return pluralize(round($dateDiff), 'second'). ' ago';
 }
 
 function getNextSortRequestString($field)
