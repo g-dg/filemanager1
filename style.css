@@ -169,6 +169,11 @@ td {
 	padding-bottom: 0.25em;
 }
 
+.listing > tbody > tr > td.icon {
+	width: 20px;
+	max-width: 20px;
+}
+
 .listing > tbody > tr:nth-of-type(odd) {
 	background-color: #f9f9f9;
 }
