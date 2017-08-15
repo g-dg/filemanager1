@@ -70,7 +70,7 @@ function serveShareListing()
 
 function serveDirectoryListing($share, $path)
 {
-	$date_format = 'Y-m-d h:i';
+	$date_format = 'Y-m-d H:i';
 
 	$listing = '<table><thead>'.
 			'<tr>'.
