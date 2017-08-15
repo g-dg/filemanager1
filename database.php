@@ -12,6 +12,12 @@ function dbQuery($query)
 	if (!isset($GLOBALS['dbcon']))
 	{
 		$GLOBALS['dbcon'] = new SQLite3(GD_FILEMANAGER_DATABASE_FILE);
+		$result = $GLOBALS['dbcon']->query('PRAGMA user_version;');
+		$user_version = $result->fetchArray(SQLITE3_NUM);
+		if ($user_version[0] !== 0) {
+			http_response_code(500);
+			die('Database error! (Tried to use an incompatible database version)');
+		}
 	}
 	if (($result = @$GLOBALS['dbcon']->query($query)) === false)
 	{
