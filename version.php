@@ -1,2 +1,2 @@
 <?php
-define('GD_FILEMANAGER_VERSION', '1.8.0');
+define('GD_FILEMANAGER_VERSION', '1.8.1');
