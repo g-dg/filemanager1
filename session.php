@@ -9,12 +9,9 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 
 function startSession()
 {
-	if (!isset($_COOKIE[session_name()]))
+	if (!isset($_COOKIE[session_name()]) && isset($_GET[session_name()]))
 	{
-		if (isset($_GET[session_name()]))
-		{
-			session_id($_GET[session_name()]);
-		}
+		session_id($_GET[session_name()]);
 	}
 	
 	// start the session
