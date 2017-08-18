@@ -178,10 +178,11 @@ echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'">&
 <br />
 <br />
 ';
-if (isset($_GET['msg'])) {
-	echo '<div style="font-size: large;">'.htmlentities($_GET['msg']).'</div>
+if (isset($_SESSION['msg'])) {
+	echo '<div style="font-size: large;">'.htmlentities($_SESSION['msg']).'</div>
 <br />
 ';
+	unset($_SESSION['msg']);
 }
 echo '<noscript><div style="font-size: large;"><em>Note: You will not be asked for confirmation.</em></div><br /></noscript>
 <form action="admin_backend.php" method="post">

@@ -286,18 +286,21 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 	unset($_SESSION['csrf_token']);
 	if (processAdminInput() === true)
 	{
-		header('Location: admin.php?msg='.urlencode('The last action completed successfully.'));
+		$_SESSION['msg'] = 'The last action completed successfully.';
+		header('Location: admin.php');
 		exit();
 	}
 	else
 	{
-		header('Location: admin.php?msg='.urlencode('An error occurred performing the last action, nothing has been changed. ('.$GLOBALS['error_msg'].')'));
+		$_SESSION['msg'] = 'An error occurred performing the last action, nothing has been changed. ('.$GLOBALS['error_msg'].')';
+		header('Location: admin.php');
 		exit();
 	}
 }
 else
 {
 	unset($_SESSION['csrf_token']);
-	header('Location: admin.php?msg='.urlencode('Attempted CSRF attack detected!'));
+	$_SESSION['msg'] = 'Attempted CSRF attack detected!';
+	header('Location: admin.php');
 	exit();
 }
