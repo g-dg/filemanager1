@@ -105,11 +105,17 @@ function sortListing($listing, $field, $order)
 }
 function sortListingAsRequested($listing)
 {
+	if (!isset($_SESSION['sort_field'], $_SESSION['sort_order']))
+	{
+		$_SESSION['sort_field'] = 'name';
+		$_SESSION['sort_order'] = 'asc';
+	}
 	if (isset($_GET['sort'], $_GET['order']))
 	{
-		return sortListing($listing, $_GET['sort'], $_GET['order']);
+		$_SESSION['sort_field'] = $_GET['sort'];
+		$_SESSION['sort_order'] = $_GET['order'];
 	}
-	return sortListing($listing, 'name', 'asc');
+	return sortListing($listing, $_SESSION['sort_field'], $_SESSION['sort_order']);
 }
 
 function prettifyFileSize($size)
