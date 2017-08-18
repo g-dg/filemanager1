@@ -22,7 +22,7 @@ echo '<form action="login_backend.php" method="post" class="standard">
 ';
 @include('config.php');
 if (defined('GD_FILEMANAGER_MOTD')) {
-	echo '<div class="motd">'.GD_FILEMANAGER_MOTD.'</div>
+	echo '	<div class="motd">'.GD_FILEMANAGER_MOTD.'</div>
 ';
 }
 
