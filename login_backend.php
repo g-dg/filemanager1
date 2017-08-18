@@ -19,5 +19,6 @@ else
 {
 	unset($_SESSION['csrf_token']);
 	$_SESSION['msg'] = 'Attempted CSRF attack detected!';
+	header('Location: login.php');
 	exit();
 }
