@@ -12,6 +12,7 @@ authenticate();
 // check the CSRF token
 if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token'])
 {
+	unset($_SESSION['csrf_token']);
 	if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 	{
 		if (isset($_POST['old_password'], $_POST['new_password1'], $_POST['new_password2']) &&
