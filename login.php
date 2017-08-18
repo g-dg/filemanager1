@@ -1,6 +1,10 @@
 <?php
 require_once('init.php');
+require_once('config.php');
+require_once('session.php');
 require_once('template.php');
+startSession();
+checkUserIP();
 
 outputLoginTemplateHeader();
 echo '<form action="login_backend.php" method="post" class="standard">
