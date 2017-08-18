@@ -17,6 +17,12 @@ if (!inGroup('root'))
 	exit('This account doesn\'t have the administrator permission!<br /><a href="index.php">Back to main listing</a><br /><a href="logout.php">Log Out</a>');
 }
 
+// set CSRF token
+$_SESSION['csrf_token'] = '';
+for ($i = 0; $i < 32; $i++) {
+	$_SESSION['csrf_token'] .= substr('0123456789abcdef', mt_rand(0, 15), 1);
+}
+
 $GLOBALS['all_users'] = dbQuery('SELECT "ID", "NAME", "GROUPS" FROM "USERS";');
 $GLOBALS['all_shares'] = dbQuery('SELECT "ID", "NAME", "PATH", "GROUPS_VISIBLE", "GROUPS_ACCESS_FILES", "GROUPS_MODIFY_FILES" FROM "SHARES";');
 
@@ -196,6 +202,7 @@ outputFullShareList();
 echo '
 		</fieldset>
 	</div>
+	<input type="hidden" name="csrf_token" value="'.htmlentities($_SESSION['csrf_token']).'">
 	<br />
 </form>';
 

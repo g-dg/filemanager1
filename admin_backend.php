@@ -280,13 +280,24 @@ function processAdminInput()
 	}
 }
 
-if (processAdminInput() === true)
+// check the CSRF token
+if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token'])
 {
-	header('Location: admin.php?msg='.urlencode('The last action completed successfully.'));
-	exit();
+	unset($_SESSION['csrf_token']);
+	if (processAdminInput() === true)
+	{
+		header('Location: admin.php?msg='.urlencode('The last action completed successfully.'));
+		exit();
+	}
+	else
+	{
+		header('Location: admin.php?msg='.urlencode('An error occurred performing the last action, nothing has been changed. ('.$GLOBALS['error_msg'].')'));
+		exit();
+	}
 }
 else
 {
-	header('Location: admin.php?msg='.urlencode('An error occurred performing the last action, nothing has been changed. ('.$GLOBALS['error_msg'].')'));
+	unset($_SESSION['csrf_token']);
+	header('Location: admin.php?msg='.urlencode('Attempted CSRF attack detected!'));
 	exit();
 }
