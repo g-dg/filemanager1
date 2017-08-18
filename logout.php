@@ -1,7 +1,10 @@
 <?php
 require_once('init.php');
+require_once('config.php');
+require_once('session.php');
+startSession();
+checkUserIP();
 
-session_start();
 session_unset();
 //session_regenerate_id(true);
 //setcookie(session_name(), '', time() - 1);
