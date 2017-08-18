@@ -192,9 +192,9 @@ function prettifyDate($date)
 function getNextSortRequestString($field)
 {
 	$currentOrder = 'asc';
-	if (isset($_GET['order']))
+	if (isset($_SESSION['sort_order']))
 	{
-		$currentOrder = $_GET['order'];
+		$currentOrder = $_SESSION['sort_order'];
 	}
 	$newOrder = $currentOrder;
 	switch ($currentOrder)
