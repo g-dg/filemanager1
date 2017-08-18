@@ -20,7 +20,6 @@ echo '<form action="login_backend.php" method="post" class="standard">
 	<input id="password" type="password" name="password">
 	<input type="submit" name="submit" autocomplete="current-password" value="Log In">
 ';
-@include('config.php');
 if (defined('GD_FILEMANAGER_MOTD')) {
 	echo '	<div class="motd">'.GD_FILEMANAGER_MOTD.'</div>
 ';
