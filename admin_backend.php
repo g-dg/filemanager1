@@ -300,7 +300,7 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 else
 {
 	unset($_SESSION['csrf_token']);
-	$_SESSION['msg'] = 'Attempted CSRF attack detected!';
+	$_SESSION['msg'] = 'Possible attempted CSRF attack detected!';
 	header('Location: admin.php');
 	exit();
 }
