@@ -20,6 +20,14 @@ echo '<form action="login_backend.php" method="post" class="standard">
 	<input id="password" type="password" name="password">
 	<input type="submit" name="submit" autocomplete="current-password" value="Log In">
 ';
+
+if (isset($_SESSION['msg']))
+{
+	echo '<div style="clear: both; font-weight: bold; font-size: large; text-align: center;">'.htmlentities($_SESSION['msg']).'</div>
+';
+	unset($_SESSION['msg']);
+}
+
 if (defined('GD_FILEMANAGER_MOTD')) {
 	echo '	<div class="motd">'.GD_FILEMANAGER_MOTD.'</div>
 ';

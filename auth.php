@@ -15,6 +15,7 @@ function authenticate()
 		if (!isset($_SESSION['username']))
 		{
 			session_unset();
+			$_SESSION['msg'] = 'An error occurred while attempting to authenticate. Please try again.';
 			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php');
 			exit();
 		}
@@ -46,6 +47,7 @@ function authenticate()
 		{
 			// auth failed
 			session_unset();
+			$_SESSION['msg'] = 'Incorrect username or password.';
 			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php');
 			exit();
 		}
