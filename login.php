@@ -6,6 +6,12 @@ require_once('template.php');
 startSession();
 checkUserIP();
 
+// set CSRF token
+$_SESSION['csrf_token'] = '';
+for ($i = 0; $i < 32; $i++) {
+	$_SESSION['csrf_token'] .= substr('0123456789abcdef', mt_rand(0, 15), 1);
+}
+
 outputLoginTemplateHeader();
 echo '<form action="login_backend.php" method="post" class="standard">
 	<label for="username">Username:</label>
@@ -20,6 +26,7 @@ if (defined('GD_FILEMANAGER_MOTD')) {
 ';
 }
 
-echo '</form>';
+echo '	<input type="hidden" name="csrf_token" value="'.htmlentities($_SESSION['csrf_token']).'">
+</form>';
 
 outputLoginTemplateFooter();
