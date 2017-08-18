@@ -23,35 +23,43 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 			$old_pass = dbQuery('SELECT "PASSWORD_SHA512" FROM "USERS" WHERE "ID" = '.$user_id.';');
 			if (hash('sha512', $_POST['old_password']) !== $old_pass[0]['PASSWORD_SHA512'])
 			{
-				header('Location: account.php?msg='.urlencode('The current password is incorrect!'));
+				$_SESSION['msg'] = 'The current password is incorrect!';
+				header('Location: account.php');
 				exit();
 			}
 			
 			$pw_hash = hash('sha512', $_POST['new_password1']);
 			if (dbExec('UPDATE "USERS" SET "PASSWORD_SHA512" = \''.SQLite3::escapeString($pw_hash).'\' WHERE "ID" = '.$user_id.';'))
 			{
-				header('Location: account.php?msg='.urlencode('Your password has been updated successfully.'));
+				$_SESSION['msg'] = 'Your password has been updated successfully.';
+				header('Location: account.php');
+				exit();
 			}
 			else
 			{
-				header('Location: account.php?msg='.urlencode('An error occurred when updating your password. Your password probably is unchanged. If you cannot access your account, contact the administrator.'));
+				$_SESSION['msg'] = 'An error occurred when updating your password. Your password is probably unchanged. If you cannot access your account, contact the administrator.';
+				header('Location: account.php');
+				exit();
 			}
 		}
 		else
 		{
-			header('Location: account.php?msg='.urlencode('The passwords don\'t match!'));
+			$_SESSION['msg'] = 'The passwords don\'t match!';
+			header('Location: account.php');
 			exit();
 		}
 	}
 	else
 	{
-		header('Location: account.php?msg='.urlencode('The guest user cannot change the password!'));
+		$_SESSION['msg'] = 'The guest user cannot change the password!';
+		header('Location: account.php');
 		exit();
 	}
 }
 else
 {
 	unset($_SESSION['csrf_token']);
-	header('Location: account.php?msg='.urlencode('Attempted CSRF attack detected!'));
+	$_SESSION['msg'] = 'Attempted CSRF attack detected!';
+	header('Location: account.php');
 	exit();
 }

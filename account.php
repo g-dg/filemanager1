@@ -22,11 +22,12 @@ echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/'
 <br />
 <br />
 ';
-if (isset($_GET['msg']))
+if (isset($_SESSION['msg']))
 {
-	echo '<div style="font-size: large;">'.htmlentities($_GET['msg']).'</div>
+	echo '<div style="font-size: large;">'.htmlentities($_SESSION['msg']).'</div>
 <br />
 ';
+	unset($_SESSION['msg']);
 }
 echo '<form action="account_backend.php" method="post" class="standard">
 	<fieldset>
