@@ -37,8 +37,8 @@ function getShareList()
 		$share_array[] = array('name' => $share['NAME'],
 				'uri' => getHttpUri($share['NAME']),
 				'basic_type' => 'directory',
-				'size' => getFileSize($share, ''),
-				'last_modified' => null);
+				'size' => getFileSize($share['NAME'], ''),
+				'last_modified' => getFileModificationTime($share['NAME'], ''));
 	}
 	return $share_array;
 }
