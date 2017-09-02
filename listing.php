@@ -225,7 +225,7 @@ function serveShareListing()
 			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
 			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
 			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
-			'<th><span title="Download">Download</span></th>'.
+			'<th></th>'.
 			'</tr></thead><tbody>';
 	foreach ($shares as $share)
 	{
@@ -234,9 +234,9 @@ function serveShareListing()
 			echo '<tr>'.
 					'<td class="icon"><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></span></td>'.
 					'<td><span title="'.htmlentities($share['name']).'/"><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></span></td>'.
-					'<td><span title="Last modification time not available"><em>N/A</em></span></td>'.
+					'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, getFileModificationTime($share['name'], ''))).'"><em>'.htmlentities(prettifyDate(getFileModificationTime($share['name'], ''))).'</em></span></td>'.
 					'<td><span title="Contains '.htmlentities(pluralize(getFileSize($share['name'], ''), 'file')).'">'.htmlentities(prettifyFileCount(getFileSize($share['name'], ''))).'</span></td>'.
-					'<td><span title="Download not available"><em>N/A</em></span></td>'.
+					'<td></td>'.
 					'</tr>';
 		}
 	}
@@ -259,7 +259,7 @@ function serveDirectoryListing($share, $path)
 					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
 					'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
 					'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
-					'<th><span title="Download">Download</span></th>'.
+					'<th></th>'.
 					'</tr></thead><tbody>';
 			echo '<tr>'.
 					'<td class="icon"><span title="Back"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/back.gif" alt="[PARENTDIR]" width="20" height="22"></span></td>'.
@@ -291,7 +291,7 @@ function serveDirectoryListing($share, $path)
 								'<td><span title="'.htmlentities($file['name']).'/"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'/</a></span></td>'.
 								'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'">'.htmlentities(prettifyDate($file['last_modified'])).'</span></td>'.
 								'<td><span title="Contains '.htmlentities(pluralize(number_format($file['size'], 0, '.', ','), 'file')).'">'.htmlentities(prettifyFileCount($file['size'])).'</span></td>'.
-								'<td><span title="Download not available"><em>N/A</em></span></td>'.
+								'<td></td>'.
 								'</tr>';
 					}
 					else
@@ -302,7 +302,7 @@ function serveDirectoryListing($share, $path)
 								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
 								'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'?">'.htmlentities(prettifyDate($file['last_modified'])).'?</span></td>'.
 								'<td><span title="Unknown size">?</span></td>'.
-								'<td><span title="Download not available"><em>N/A</em></span></td>'.
+								'<td></td>'.
 								'</tr>';
 					}
 				}
