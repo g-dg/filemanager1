@@ -142,6 +142,12 @@ td {
 	padding-right: .5em;
 }
 
+thead th {
+	border-bottom-color: lightgray;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
 .error {
 	font-size: large;
 	color: #FF0000;
