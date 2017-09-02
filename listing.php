@@ -22,13 +22,27 @@ as of 1.5:
 function sortNameAsc($listing)
 {
 	// A-Z
-	usort($listing, function($a,$b){return strcasecmp($a['name'],$b['name']);});
+	if (GD_FILEMANAGER_NATURAL_SORT)
+	{
+		usort($listing, function($a,$b){return strnatcasecmp($a['name'], $b['name']);});
+	}
+	else
+	{
+		usort($listing, function($a,$b){return strcasecmp($a['name'], $b['name']);});
+	}
 	return $listing;
 }
 function sortNameDesc($listing)
 {
 	// Z-A
-	usort($listing, function($a,$b){return strcasecmp($b['name'],$a['name']);});
+	if (GD_FILEMANAGER_NATURAL_SORT)
+	{
+		usort($listing, function($a,$b){return strnatcasecmp($b['name'], $a['name']);});
+	}
+	else
+	{
+		usort($listing, function($a,$b){return strcasecmp($b['name'], $a['name']);});
+	}
 	return $listing;
 }
 function sortDateAsc($listing)
