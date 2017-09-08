@@ -248,7 +248,7 @@ function serveShareListing()
 			echo '<tr>'.
 					'<td class="icon"><span title="Directory"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/folder.gif" alt="[DIR]" width="20" height="22"></span></td>'.
 					'<td><span title="'.htmlentities($share['name']).'/"><a href="'.htmlentities($share['uri']).'">'.htmlentities($share['name']).'/</a></span></td>'.
-					'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $share['last_modified'])).'"><em>'.htmlentities(prettifyDate($share['last_modified'])).'</em></span></td>'.
+					'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $share['last_modified'])).'">'.htmlentities(prettifyDate($share['last_modified'])).'</span></td>'.
 					'<td><span title="Contains '.htmlentities(pluralize($share['size'], 'file')).'">'.htmlentities(prettifyFileCount($share['size'])).'</span></td>'.
 					'<td></td>'.
 					'</tr>';
