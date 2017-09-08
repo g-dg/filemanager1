@@ -55,26 +55,15 @@ body{
 	padding-bottom: 1em;
 }
 
-.content form.standard label {
-	clear: left;
-	float: left;
-	/*min-width: 5em;*/
-	text-align: right;
-	margin-right: .5em;
-	position: relative;
-	margin: 0.25em;
-	
-}
 .content form.standard input,
 .content form.standard button,
 .content form.standard textarea,
 .content form.standard select {
-	float: left;
 	margin-top: 0.25em;
 	margin-bottom: 0.25em;
 	vertical-align: middle;
 	max-width: 100%;
-	min-width: 50%;
+	width: 100%;
 }
 .content form.standard input[type="button"],
 .content form.standard input[type="submit"],

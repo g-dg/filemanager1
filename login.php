@@ -14,10 +14,8 @@ for ($i = 0; $i < 32; $i++) {
 
 outputLoginTemplateHeader();
 echo '<form action="login_backend.php" method="post" class="standard">
-	<label for="username">Username:</label>
-	<input id="username" type="text" name="username" autocomplete="on" autofocus="autofocus">
-	<label for="password">Password:</label>
-	<input id="password" type="password" name="password">
+	<input id="username" placeholder="Username" type="text" name="username" autocomplete="on" autofocus="autofocus">
+	<input id="password" placeholder="Password" type="password" name="password">
 	<input type="submit" name="submit" autocomplete="current-password" value="Log In">
 ';
 

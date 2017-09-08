@@ -42,18 +42,9 @@ if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 {
 	echo '	<fieldset>
 		<legend>Password</legend>
-		<label>
-			Current Password:
-		</label>
-		<input type="password" name="old_password" value="" autofocus="autofocus">
-		<label>
-			New Password: 
-		</label>
-		<input type="password" name="new_password1" value="">
-		<label>
-			New Password (again): 
-		</label>
-		<input type="password" name="new_password2" value="">
+		<input placeholder="Current Password" type="password" name="old_password" value="" autofocus="autofocus">
+		<input placeholder="New Password" type="password" name="new_password1" value="">
+		<input placeholder="New Password (again)" type="password" name="new_password2" value="">
 		<input type="submit" name="submit" value="Change Password" style="width: 100%;">
 	</fieldset>';
 }
