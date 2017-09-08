@@ -148,9 +148,9 @@ function prettifyFileSize($size)
 	}
 	if ($size < (2**40))
 	{
-		return sprintf("%01.1f GiB", ($size / (2**20)));
+		return sprintf("%01.1f GiB", ($size / (2**30)));
 	}
-	return sprintf("%01.1f TiB", ($size / (2**30)));
+	return sprintf("%01.1f TiB", ($size / (2**40)));
 }
 
 function prettifyFileCount($count)
