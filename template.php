@@ -22,11 +22,11 @@ function outputStandardTemplateHeader($title)
 	echo '<li>Currently logged in as "'.htmlentities($_SESSION['username']).'"</li>';
 	if (inGroup('root'))
 	{
-		echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></li>';
+		echo '<li><span title="Manage user accounts and shares"><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/admin.php').'">Administration</a></span></li>';
 	}
-	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></li>';
-	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/about.php').'">About</a></li>';
-	echo '<li><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></li>';
+	echo '<li><span title="View/change account settings"><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/account.php').'">My Account</a></span></li>';
+	echo '<li><span title="About Garnet DeGelder\'s File Manager"><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/about.php').'">About</a></span></li>';
+	echo '<li><span title="Log out"><a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/logout.php').'">Log Out</a></span></li>';
 	echo '</ul>
 			</div>
 			<div class="title">'.htmlentities($title).' - Garnet DeGelder\'s File Manager on '.htmlentities($_SERVER['HTTP_HOST']).'</div>
