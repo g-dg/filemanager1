@@ -2,6 +2,7 @@
 
 body{
 	margin: .5rem;
+	font-family: serif;
 }
 
 .header {
@@ -47,14 +48,22 @@ body{
 	margin-bottom: 0em;
 }
 
+.login form.standard {
+	width: 50%;
+	margin: auto;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
 .content form.standard label {
 	clear: left;
 	float: left;
-	min-width: 5em;
+	/*min-width: 5em;*/
 	text-align: right;
 	margin-right: .5em;
 	position: relative;
 	margin: 0.25em;
+	
 }
 .content form.standard input,
 .content form.standard button,
@@ -64,6 +73,8 @@ body{
 	margin-top: 0.25em;
 	margin-bottom: 0.25em;
 	vertical-align: middle;
+	max-width: 100%;
+	min-width: 50%;
 }
 .content form.standard input[type="button"],
 .content form.standard input[type="submit"],
@@ -71,6 +82,7 @@ body{
 .content form.standard button {
 	clear: both;
 	margin-top: 1em;
+	width: 100%;
 }
 
 input[type="button"],
@@ -78,6 +90,23 @@ input[type="submit"],
 input[type="reset"],
 button {
 	min-width: 100%;
+}
+
+.content input,
+.content button,
+.content textarea,
+.content select {
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 2px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.content input[type="button"],
+.content input[type="submit"],
+.content input[type="reset"],
+.content button {
+	background-color: #eeeeee;
 }
 
 .footer {
@@ -98,7 +127,7 @@ button {
 }
 
 .login {
-	width: 33%;
+	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -110,17 +139,20 @@ button {
 		text-align: center;
 	}
 }
+/*@media (min-width: 1440px) {
+	.login {
+		width: 33%;
+	}
+}*/
 
-.login input[type="button"],
-.login input[type="submit"],
-.login input[type="reset"],
-.login button {
-	min-width: 50%;
-	width: 75%;
-	margin-left: 12.5%;
-	margin-right: 12.5%;
-	padding-left: 0px;
-	padding-right: 0px;
+
+.login .msg {
+	clear: both;
+	font-weight: bold;
+	font-size: large;
+	text-align: center;
+	margin: 0;
+	padding: .5em;
 }
 
 .motd {
@@ -142,7 +174,7 @@ td {
 	padding-right: .5em;
 }
 
-thead th {
+.listing > thead > th {
 	border-bottom-color: lightgray;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
@@ -181,5 +213,18 @@ thead th {
 }
 
 .listing > tbody > tr:nth-of-type(odd) {
-	background-color: #f9f9f9;
+	background-color: #f7f7f7;
 }
+
+.listing > tbody > tr:hover {
+	background-color: #eeeeee;
+}
+
+a {
+	color: blue;
+}
+a:hover,
+a:active {
+	color: red;
+}
+

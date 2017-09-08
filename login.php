@@ -23,7 +23,7 @@ echo '<form action="login_backend.php" method="post" class="standard">
 
 if (isset($_SESSION['msg']))
 {
-	echo '<div style="clear: both; font-weight: bold; font-size: large; text-align: center;">'.htmlentities($_SESSION['msg']).'</div>
+	echo '<div class="msg">'.htmlentities($_SESSION['msg']).'</div>
 ';
 	unset($_SESSION['msg']);
 }
