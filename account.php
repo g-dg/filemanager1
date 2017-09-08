@@ -45,7 +45,7 @@ if ($_SESSION['username'] !== GD_FILEMANAGER_GUEST_USER)
 		<input placeholder="Current Password" type="password" name="old_password" value="" autofocus="autofocus">
 		<input placeholder="New Password" type="password" name="new_password1" value="">
 		<input placeholder="New Password (again)" type="password" name="new_password2" value="">
-		<input type="submit" name="submit" value="Change Password" style="width: 100%;">
+		<input type="submit" name="submit" value="Change Password">
 	</fieldset>';
 }
 	echo '	<fieldset>

@@ -11,7 +11,8 @@ function outputStandardTemplateHeader($title)
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>'.htmlentities($title).' - Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'</title>
 		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'">
 	</head>
@@ -30,26 +31,6 @@ function outputStandardTemplateHeader($title)
 	echo '</ul>
 			</div>
 			<div class="title">'.htmlentities($title).' - Garnet DeGelder\'s File Manager on '.htmlentities($_SERVER['HTTP_HOST']).'</div>
-		</div>
-		<div class="content">
-';
-}
-
-function outputLoginTemplateHeader()
-{
-	echo '<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Log In to Garnet DeGelder\'s File Manager</title>
-		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'">
-	</head>
-	<body class="login">
-		<div class="header">
-			<div class="title">
-				Log in to Garnet DeGelder\'s File Manager on '.htmlentities($_SERVER['HTTP_HOST']).'
-			</div>
 		</div>
 		<div class="content">
 ';
@@ -120,9 +101,4 @@ function outputStandardTemplateFooter()
 	</body>
 </html>
 ';
-}
-
-function outputLoginTemplateFooter()
-{
-	outputStandardTemplateFooter();
 }
