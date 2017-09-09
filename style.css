@@ -245,6 +245,17 @@ fieldset {
 	border: #999 1px solid;
 }
 
+code {
+	display: block;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	background-color: #eee;
+	border: #777 1px solid;
+	border-radius: 4px;
+}
+
 a {
 	color: #11f;
 }
@@ -252,4 +263,3 @@ a:hover,
 a:active {
 	color: #f11;
 }
-
