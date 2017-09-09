@@ -12,6 +12,161 @@ body{
 	color: #222;
 }
 
+input,
+button,
+textarea,
+select {
+	display: block;
+	width: 100%;
+	min-height: 17px;
+	padding: 6px 12px;
+	line-height: 1.42857143;
+	color: #222;
+	background-color: #fff;
+	background-image: none;
+	border: #ccc 1px solid;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	margin: 0.5em 0;
+}
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+input::-moz-placeholder,
+button::-moz-placeholder,
+textarea::-moz-placeholder,
+select::-moz-placeholder {
+  color: #666;
+  opacity: 1;
+}
+input:-ms-input-placeholder,
+button:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+select:-ms-input-placeholder {
+  color: #666;
+}
+input::-webkit-input-placeholder,
+button::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+select::-webkit-input-placeholder {
+  color: #666;
+}
+input::-ms-expand,
+button::-ms-expand,
+textarea::-ms-expand,
+select::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+textarea {
+  height: auto;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+}
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+button:active {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+input[type="button"][disabled],
+input[type="submit"][disabled],
+input[type="reset"][disabled],
+button[disabled],
+fieldset[disabled] input[type="button"],
+fieldset[disabled] input[type="submit"],
+fieldset[disabled] input[type="reset"],
+fieldset[disabled] button[disabled] {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  text-shadow: 0 1px 0 #fff;
+  background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+  background-image:      -o-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e0e0e0));
+  background-image:         linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-color: #dbdbdb;
+  border-color: #ccc;
+}
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+button:focus {
+  background-color: #e0e0e0;
+  background-position: 0 -15px;
+}
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+button:active {
+  background-color: #e0e0e0;
+  border-color: #dbdbdb;
+}
+input[type="button"][disabled],
+input[type="submit"][disabled],
+input[type="reset"][disabled],
+button[disabled],
+fieldset[disabled] input[type="button"],
+fieldset[disabled] input[type="submit"],
+fieldset[disabled] input[type="reset"],
+fieldset[disabled] button[disabled],
+input[type="button"][disabled]:hover,
+input[type="submit"][disabled]:hover,
+input[type="reset"][disabled]:hover,
+button[disabled]:hover,
+fieldset[disabled] input[type="button"]:hover,
+fieldset[disabled] input[type="submit"]:hover,
+fieldset[disabled] input[type="reset"]:hover,
+fieldset[disabled] button[disabled]:hover,
+input[type="button"][disabled]:focus,
+input[type="submit"][disabled]:focus,
+input[type="reset"][disabled]:focus,
+button[disabled]:focus,
+fieldset[disabled] input[type="button"]:focus,
+fieldset[disabled] input[type="submit"]:focus,
+fieldset[disabled] input[type="reset"]:focus,
+fieldset[disabled] button[disabled]:focus,
+input[type="button"][disabled]:active,
+input[type="submit"][disabled]:active,
+input[type="reset"][disabled]:active,
+button[disabled]:active,
+fieldset[disabled] input[type="button"]:active,
+fieldset[disabled] input[type="submit"]:active,
+fieldset[disabled] input[type="reset"]:active,
+fieldset[disabled] button[disabled]:active {
+  background-color: #e0e0e0;
+  background-image: none;
+}
+
 .header {
 	float: left;
 	clear: both;
@@ -65,67 +220,6 @@ form.login {
 	form.login {
 		width: 75%;
 	}
-}
-
-input,
-button,
-textarea,
-select {
-	display: block;
-	width: 100%;
-	min-height: 17px;
-	padding: 6px 12px;
-	font-size: 14px;
-	line-height: 1.42857143;
-	color: #222;
-	background-color: #fff;
-	background-image: none;
-	border: #ccc 1px solid;
-	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-	margin: 0.5em 0;
-}
-input:focus,
-button:focus,
-textarea:focus,
-select:focus {
-  border-color: #66afe9;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-}
-input::-moz-placeholder,
-button::-moz-placeholder,
-textarea::-moz-placeholder,
-select::-moz-placeholder {
-  color: #666;
-  opacity: 1;
-}
-input:-ms-input-placeholder,
-button:-ms-input-placeholder,
-textarea:-ms-input-placeholder,
-select:-ms-input-placeholder {
-  color: #666;
-}
-input::-webkit-input-placeholder,
-button::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder,
-select::-webkit-input-placeholder {
-  color: #666;
-}
-input::-ms-expand,
-button::-ms-expand,
-textarea::-ms-expand,
-select::-ms-expand {
-  background-color: transparent;
-  border: 0;
-}
-textarea {
-  height: auto;
 }
 
 .footer {
