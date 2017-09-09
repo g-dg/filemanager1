@@ -9,7 +9,7 @@
 body{
 	margin: 1rem;
 	font-family: sans-serif;
-	color: #111;
+	color: #222;
 }
 
 .header {
@@ -53,11 +53,18 @@ body{
 
 form.login {
 	width: 50%;
-	margin: auto;
-	padding-top: 1em;
-	padding-bottom: 1em;
-	padding: 15px;
 	margin: 0 auto;
+	padding: 1em 0;
+}
+@media (max-width: 425px) {
+	form.login {
+		width: 67%;
+	}
+}
+@media (max-width: 320px) {
+	form.login {
+		width: 75%;
+	}
 }
 
 input,
@@ -172,10 +179,6 @@ textarea {
 	padding-top: .5em;
 	padding-bottom: .5em;
 	text-align: center;
-}
-
-th {
-	color: #222;
 }
 
 th,
