@@ -16,7 +16,7 @@ echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/'
 ';
 
 echo '<h1>About</h1>
-<p>Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).'</p>
+<p>Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).' running on "'.htmlentities($_SERVER['HTTP_HOST']).'"</p>
 <h1>License</h1>
 <p>Copyright (C) 2017  Garnet DeGelder</p>
 
