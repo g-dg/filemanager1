@@ -359,3 +359,10 @@ a:hover,
 a:active {
 	color: #f11;
 }
+
+@media (max-width: 319px) {
+	.header::after {
+		content: "Your screen resolution is not supported. Some elements may be an unusable size.";
+		color: red;
+	}
+}
