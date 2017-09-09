@@ -233,7 +233,7 @@ function serveShareListing()
 {
 	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	$shares = sortListingAsRequested(getShareList());
-	echo '<table class="listing"><thead>'.
+	echo '<div style="overflow: auto;"><table class="listing"><thead>'.
 			'<tr>'.
 			'<th></th>'.
 			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
@@ -254,7 +254,7 @@ function serveShareListing()
 					'</tr>';
 		}
 	}
-	echo '</tbody></table>';
+	echo '</tbody></table></div>';
 	outputStandardTemplateFooter();
 }
 
@@ -267,7 +267,7 @@ function serveDirectoryListing($share, $path)
 		if ($dir_list !== false)
 		{
 			outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
-			echo '<table class="listing"><thead>'.
+			echo '<div style="overflow: auto;"><table class="listing"><thead>'.
 					'<tr>'.
 					'<th></th>'.
 					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
@@ -321,7 +321,7 @@ function serveDirectoryListing($share, $path)
 					}
 				}
 			}
-			echo '</tbody></table>';
+			echo '</tbody></table></div>';
 			outputStandardTemplateFooter();
 		}
 		else
