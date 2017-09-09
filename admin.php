@@ -27,8 +27,16 @@ $GLOBALS['all_users'] = dbQuery('SELECT "ID", "NAME", "GROUPS" FROM "USERS";');
 $GLOBALS['all_shares'] = dbQuery('SELECT "ID", "NAME", "PATH", "GROUPS_VISIBLE", "GROUPS_ACCESS_FILES", "GROUPS_MODIFY_FILES" FROM "SHARES";');
 
 // sort the users and shares
-usort($GLOBALS['all_users'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
-usort($GLOBALS['all_shares'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
+if (GD_FILEMANAGER_NATURAL_SORT)
+{
+	usort($GLOBALS['all_users'], function($a,$b){return strnatcasecmp($a['NAME'],$b['NAME']);});
+	usort($GLOBALS['all_shares'], function($a,$b){return strnatcasecmp($a['NAME'],$b['NAME']);});
+}
+else
+{
+	usort($GLOBALS['all_users'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
+	usort($GLOBALS['all_shares'], function($a,$b){return strcasecmp($a['NAME'],$b['NAME']);});
+}
 
 function outputUserList()
 {
