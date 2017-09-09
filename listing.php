@@ -315,7 +315,7 @@ function serveDirectoryListing($share, $path)
 						echo '<tr>'.
 								'<td class="icon"><span title="Unknown"><img src="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'/icon/unknown.png" alt="[ ? ]" width="24" height="24"></span></td>'.
 								'<td><span title="'.htmlentities($file['name']).'"><a href="'.htmlentities($file['uri']).'">'.htmlentities($file['name']).'</a></span></td>'.
-								'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'?" onclick="alert(\''.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'\');">'.htmlentities(prettifyDate($file['last_modified'])).'?</span></td>'.
+								'<td><span title="'.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'?" onclick="alert(\''.htmlentities(date(GD_FILEMANAGER_DATE_FORMAT, $file['last_modified'])).'?\');">'.htmlentities(prettifyDate($file['last_modified'])).'?</span></td>'.
 								'<td><span title="Unknown size" onclick="alert(\'Unknown size\');">?</span></td>'.
 								'<td></td>'.
 								'</tr>';
