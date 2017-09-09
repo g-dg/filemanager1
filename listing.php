@@ -167,8 +167,9 @@ function prettifyFileCount($count)
 }
 
 // just adds an "s"
-function pluralize($number, $string)
+function pluralize($raw_number, $string)
 {
+	$number = preg_replace('/[^0-9]/', '', $raw_number);
 	if ($number == 1)
 	{
 		return $number . ' ' . $string;
