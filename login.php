@@ -18,6 +18,7 @@ echo '<!DOCTYPE html>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/favicon.ico').'">
 		<title>Log In to Garnet DeGelder\'s File Manager</title>
 		<link rel="stylesheet" type="text/css" href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/style.css').'">
 	</head>
