@@ -172,11 +172,11 @@ function pluralize($raw_number, $string)
 	$number = preg_replace('/[^0-9]/', '', $raw_number);
 	if ($number == 1)
 	{
-		return $number . ' ' . $string;
+		return $raw_number . ' ' . $string;
 	}
 	else
 	{
-		return $number . ' ' . $string . 's';
+		return $raw_number . ' ' . $string . 's';
 	}
 }
 // gives human-readable date (eg. 5 hours ago)
