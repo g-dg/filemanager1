@@ -261,6 +261,15 @@ form.login {
 	}
 }
 
+form.login input,
+form.login button,
+form.login textarea,
+form.login select {
+	min-width: 100%;
+	width: 100%;
+	max-width: 100%;
+}
+
 .login .msg {
 	clear: both;
 	font-weight: bold;
