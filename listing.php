@@ -133,6 +133,21 @@ function sortListingAsRequested($listing)
 	}
 	return sortListing($listing, $_SESSION['sort_field'], $_SESSION['sort_order']);
 }
+function getSortArrow($field) {
+	if ($field == $_SESSION['sort_field'])
+	{
+		switch ($_SESSION['sort_order'])
+		{
+			case 'asc':
+				return '&#x25BC;';
+				break;
+			case 'desc':
+				return '&#x25B2;';
+				break;
+		}
+	}
+	return '';
+}
 
 function prettifyFileSize($size)
 {
@@ -239,9 +254,9 @@ function serveShareListing()
 	echo '<div style="overflow: auto;"><table class="listing"><thead>'.
 			'<tr>'.
 			'<th></th>'.
-			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
-			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
-			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
+			'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">'.getSortArrow('name').'Name</a></span></th>'.
+			'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">'.getSortArrow('last-modified').'Last Modified</a></span></th>'.
+			'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">'.getSortArrow('size').'Size</a></span></th>'.
 			'<th></th>'.
 			'</tr></thead><tbody>';
 	foreach ($shares as $share)
@@ -273,9 +288,9 @@ function serveDirectoryListing($share, $path)
 			echo '<div style="overflow: auto;"><table class="listing"><thead>'.
 					'<tr>'.
 					'<th></th>'.
-					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">Name</a></span></th>'.
-					'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">Last Modified</a></span></th>'.
-					'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">Size</a></span></th>'.
+					'<th><span title="Sort by name"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('name')).'">'.getSortArrow('name').'Name</a></span></th>'.
+					'<th><span title="Sort by time last modified"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('last-modified')).'">'.getSortArrow('last-modified').'Last Modified</a></span></th>'.
+					'<th><span title="Sort by size"><a href="'.htmlentities(getCurrentHttpUri() . '?'. getNextSortRequestString('size')).'">'.getSortArrow('size').'Size</a></span></th>'.
 					'<th></th>'.
 					'</tr></thead><tbody>';
 			echo '<tr>'.
