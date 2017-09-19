@@ -8,6 +8,10 @@ checkUserIP();
 
 if (isset($_SESSION['user_id']))
 {
+	if (isset($_GET['redir']))
+	{
+		header('Location: '.$_GET['redir']);
+	}
 	header('Location: index.php');
 	exit();
 }
@@ -36,7 +40,7 @@ echo '<!DOCTYPE html>
 				</div>
 			</div>
 			<div class="content">
-				<form action="login_backend.php" method="post" class="login">
+				<form action="login_backend.php'.(isset($_GET['redir'])?'?redir='.htmlentities($_GET['redir']):'').'" method="post" class="login">
 					<input id="username" placeholder="Username" type="text" name="username" autocomplete="on" autofocus="autofocus">
 					<input id="password" placeholder="Password" type="password" name="password">
 					<input type="submit" name="submit" autocomplete="current-password" value="Log In">

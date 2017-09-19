@@ -11,8 +11,14 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 	unset($_SESSION['csrf_token']);
 	$_SESSION['username'] = $_POST['username'];
 	$_SESSION['password_hashed'] = hash('sha512', $_POST['password']);
-	header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/');
-	session_write_close();
+	if (isset($_GET['redir']))
+	{
+		header('Location: '.$_GET['redir']);
+	}
+	else
+	{
+		header('Location: index.php');
+	}
 	exit();
 }
 else

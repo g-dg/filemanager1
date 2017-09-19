@@ -5,6 +5,10 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
+require_once('session.php');
+startSession();
+checkUserIP();
+
 // authenticate the user
 function authenticate()
 {
@@ -15,7 +19,7 @@ function authenticate()
 		if (!isset($_SESSION['username']))
 		{
 			session_unset();
-			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php');
+			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php?redir='.urlencode($_SERVER['REQUEST_URI']));
 			exit();
 		}
 
@@ -47,7 +51,7 @@ function authenticate()
 			// auth failed
 			session_unset();
 			$_SESSION['msg'] = 'Incorrect username or password.';
-			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php');
+			header('Location: '.pathinfo($_SERVER['SCRIPT_NAME'])['dirname'].'/login.php?redir='.urlencode($_SERVER['REQUEST_URI']));
 			exit();
 		}
 		
