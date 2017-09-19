@@ -15,7 +15,10 @@ function startSession()
 	}
 	
 	// start the session
-	session_start();
+	if (!isset($_SESSION))
+	{
+		session_start();
+	}
 }
 
 // check the IP address, used for detecting shared links and forged sessions
