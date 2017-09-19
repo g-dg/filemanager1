@@ -12,8 +12,7 @@ authenticate();
 
 outputStandardTemplateHeader('About');
 
-echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
-';
+echo generateBackToListingMessage();
 
 echo '<h1>About</h1>
 <p>Garnet DeGelder\'s File Manager '.htmlentities(GD_FILEMANAGER_VERSION).' running on "'.htmlentities($_SERVER['HTTP_HOST']).'"</p>

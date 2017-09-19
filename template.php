@@ -103,3 +103,8 @@ function outputStandardTemplateFooter()
 </html>
 ';
 }
+
+function generateBackToListingMessage()
+{
+	return '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>';
+}

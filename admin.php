@@ -14,7 +14,7 @@ authenticate();
 if (!inGroup('root'))
 {
 	http_response_code(401);
-	exit('This account doesn\'t have the administrator permission!<br /><a href="index.php">Back to main listing</a><br /><a href="logout.php">Log Out</a>');
+	exit('This account doesn\'t have the administrator permission!<br />'.generateBackToListingMessage().'<br /><a href="logout.php">Log Out</a>');
 }
 
 // set CSRF token
@@ -182,8 +182,8 @@ function outputFullShareList()
 
 outputStandardTemplateHeader('Administration');
 
-echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname']).'">&lt; Back to main listing</a>
-<br />
+echo generateBackToListingMessage();
+echo '<br />
 <br />
 ';
 if (isset($_SESSION['msg'])) {

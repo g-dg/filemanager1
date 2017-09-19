@@ -18,8 +18,8 @@ for ($i = 0; $i < 32; $i++) {
 
 outputStandardTemplateHeader("My Account");
 
-echo '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>
-<br />
+echo generateBackToListingMessage();
+echo '<br />
 <br />
 ';
 if (isset($_SESSION['msg']))

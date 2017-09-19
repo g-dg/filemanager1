@@ -5,6 +5,7 @@ require_once('config.php');
 require_once('session.php');
 require_once('database.php');
 require_once('auth.php');
+require_once('template.php');
 startSession();
 checkUserIP();
 authenticate();
@@ -12,7 +13,7 @@ authenticate();
 if (!inGroup('root'))
 {
 	http_response_code(401);
-	exit('This account doesn\'t have the administrator permission!<br /><a href="index.php">Back to main listing</a><br /><a href="logout.php">Log Out</a>');
+	exit('This account doesn\'t have the administrator permission!<br />'.generateBackToListingMessage().'<br /><a href="logout.php">Log Out</a>');
 }
 
 // returns an array of ints
