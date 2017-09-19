@@ -5,6 +5,9 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 	exit('Error! No direct script access allowed!');
 }
 
+require_once('session.php');
+startSession();
+
 function outputStandardTemplateHeader($title)
 {
 	echo '<!DOCTYPE html>
@@ -106,5 +109,8 @@ function outputStandardTemplateFooter()
 
 function generateBackToListingMessage()
 {
+	if (isset($_SESSION['last_listing_uri'])) {
+		return '<a href="'.htmlentities($_SESSION['last_listing_uri']).'/">&lt; Back</a>';
+	}
 	return '<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>';
 }

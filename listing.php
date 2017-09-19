@@ -249,6 +249,7 @@ function getNextSortRequestString($field)
 
 function serveShareListing()
 {
+	$_SESSION['last_listing_uri'] = getCurrentHttpUri();
 	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	$shares = sortListingAsRequested(getShareList());
 	echo '<div style="overflow: auto;"><table class="listing"><thead>'.
@@ -284,6 +285,7 @@ function serveDirectoryListing($share, $path)
 		$dir_list = sortListingAsRequested(getDirectoryListing($share, $path));
 		if ($dir_list !== false)
 		{
+			$_SESSION['last_listing_uri'] = getCurrentHttpUri();
 			outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 			echo '<div style="overflow: auto;"><table class="listing"><thead>'.
 					'<tr>'.
