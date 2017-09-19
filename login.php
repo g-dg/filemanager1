@@ -6,7 +6,7 @@ require_once('template.php');
 startSession();
 checkUserIP();
 
-if (isset($_SESSION['user_id'])
+if (isset($_SESSION['user_id']))
 {
 	header('Location: index.php');
 	exit();
