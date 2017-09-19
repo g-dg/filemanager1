@@ -7,6 +7,7 @@ if (!defined('GD_FILEMANAGER_VERSION'))
 
 require_once('session.php');
 startSession();
+checkUserIP();
 
 function outputStandardTemplateHeader($title)
 {
