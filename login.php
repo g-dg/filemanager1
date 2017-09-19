@@ -6,6 +6,12 @@ require_once('template.php');
 startSession();
 checkUserIP();
 
+if (isset($_SESSION['user_id'])
+{
+	header('Location: index.php');
+	exit();
+}
+
 // set CSRF token
 $_SESSION['csrf_token'] = '';
 for ($i = 0; $i < 32; $i++) {
