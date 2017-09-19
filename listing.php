@@ -128,6 +128,8 @@ function sortListingAsRequested($listing)
 	{
 		$_SESSION['sort_field'] = $_GET['sort'];
 		$_SESSION['sort_order'] = $_GET['order'];
+		header('Location: '.getCurrentHttpUri());
+		exit();
 	}
 	return sortListing($listing, $_SESSION['sort_field'], $_SESSION['sort_order']);
 }
