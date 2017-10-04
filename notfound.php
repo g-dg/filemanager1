@@ -13,7 +13,7 @@ function serveNotFoundMessage()
 	outputStandardTemplateHeader('/'.$GLOBALS['requested_full_path']);
 	echo '<span class="error">Error: Either the file or folder "/' . htmlentities($GLOBALS['requested_full_path']) . '" does not exist, or you don\'t have permission to view it.</span>
 <br />
-'.generateBackToListingMessage();
+<a href="'.htmlentities(pathinfo($_SERVER['SCRIPT_NAME'])['dirname'] . '/').'">&lt; Back to main listing</a>';
 	outputStandardTemplateFooter();
 	exit();
 }
