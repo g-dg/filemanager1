@@ -12,6 +12,7 @@ function dbQuery($query)
 	if (!isset($GLOBALS['dbcon']))
 	{
 		$GLOBALS['dbcon'] = new SQLite3(GD_FILEMANAGER_DATABASE_FILE);
+		$GLOBALS['dbcon']->busyTimeout(60000);
 		$result = $GLOBALS['dbcon']->query('PRAGMA user_version;');
 		$user_version = $result->fetchArray(SQLITE3_NUM);
 		if ($user_version[0] !== 0) {
@@ -39,6 +40,13 @@ function dbExec($query)
 	if (!isset($GLOBALS['dbcon']))
 	{
 		$GLOBALS['dbcon'] = new SQLite3(GD_FILEMANAGER_DATABASE_FILE);
+		$GLOBALS['dbcon']->busyTimeout(60000);
+		$result = $GLOBALS['dbcon']->query('PRAGMA user_version;');
+		$user_version = $result->fetchArray(SQLITE3_NUM);
+		if ($user_version[0] !== 0) {
+			http_response_code(500);
+			die('Database error! (Tried to use an incompatible database version)');
+		}
 	}
 	return $GLOBALS['dbcon']->exec($query);
 }
